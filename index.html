@@ -654,51 +654,33 @@
   }
   .depoimentos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     margin-top: 48px;
   }
-  .depoimento-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(180,157,106, 0.2);
+  .depoimento-video {
+    width: 100%;
     border-radius: 20px;
-    padding: 40px 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(180,157,106, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: var(--navy-mid);
+    position: relative;
+    aspect-ratio: 9/16;
   }
-  .depoimento-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(180,157,106, 0.5);
-  }
-  .depoimento-card .stars {
-    color: var(--gold);
-    font-size: 16px;
-    letter-spacing: 0.1em;
-    margin-bottom: 24px;
-  }
-  .depoimento-texto {
-    color: rgba(255,255,255,0.8);
-    font-size: 14.5px;
-    line-height: 1.8;
-    font-style: italic;
-    margin-bottom: 32px;
-  }
-  .depoimento-autor strong {
+  .depoimento-video video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
     display: block;
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 500;
   }
-  .depoimento-autor span {
-    display: block;
-    color: var(--gold-light);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: 4px;
-  }
+  
+  
+  
+  
+  
+  
 
   /* ---- RESPONSIVE ---- */
 
@@ -715,7 +697,21 @@
     nav .brand span { display: none; }
     .dor-inner, .mentor-inner, .invest-inner { grid-template-columns: 1fr; gap: 48px; }
     .pilares-grid { grid-template-columns: 1fr; }
-    .depoimentos-grid { grid-template-columns: 1fr; gap: 24px; }
+    .depoimentos-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 20px;
+      -webkit-overflow-scrolling: touch;
+      grid-template-columns: none;
+    }
+    .depoimento-video {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+    .depoimentos-grid::-webkit-scrollbar { display: none; }
+    .depoimentos-grid { -ms-overflow-style: none; scrollbar-width: none; }
     .diferenciais-grid { grid-template-columns: 1fr; }
     .diferencial-card.destaque { grid-column: auto; }
     .stats-row { gap: 32px; }
@@ -935,39 +931,29 @@
       <p class="section-sub" style="color: rgba(255,255,255,0.65);">Resultados reais de quem já transformou o medo da extração em previsibilidade clínica.</p>
     </div>
     
-    <div class="depoimentos-grid animate-on-scroll">
-      
-      <!-- Card 1 -->
-      <div class="depoimento-card">
-        <div class="stars">★★★★★</div>
-        <p class="depoimento-texto">"Eu morria de medo de pegar sisos retidos, sempre encaminhava. Depois de aplicar o método de rebatimento e osteotomia do Dr. Bruno, operei meu primeiro caso complexo na semana seguinte. Sensação de dever cumprido!"</p>
-        <div class="depoimento-autor">
-          <strong>Dr. Rafael Mendes</strong>
-          <span>Cirurgião-Dentista</span>
-        </div>
+        <div class="depoimentos-grid animate-on-scroll">
+      <div class="depoimento-video">
+        <video controls playsinline>
+          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70a93651fdca9585ed8/main.m3u8" type="application/x-mpegURL">
+        </video>
       </div>
-
-      <!-- Card 2 -->
-      <div class="depoimento-card">
-        <div class="stars">★★★★★</div>
-        <p class="depoimento-texto">"A mentoria me deu a confiança que faltava. A forma como a anatomia cirúrgica é destrinchada muda o jogo. Hoje o siso não é mais um problema, é uma fonte de renda previsível pro meu consultório."</p>
-        <div class="depoimento-autor">
-          <strong>Dra. Carolina Silva</strong>
-          <span>Ortodontista</span>
-        </div>
+      <div class="depoimento-video">
+        <video controls playsinline>
+          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb064a/main.m3u8" type="application/x-mpegURL">
+        </video>
       </div>
-
-      <!-- Card 3 -->
-      <div class="depoimento-card">
-        <div class="stars">★★★★★</div>
-        <p class="depoimento-texto">"O suporte é impecável. As discussões de caso me ajudaram a montar planejamentos sem falhas. O investimento se pagou logo nos dois primeiros meses só com os pacientes que parei de encaminhar."</p>
-        <div class="depoimento-autor">
-          <strong>Dr. Felipe Castro</strong>
-          <span>Clínico Geral</span>
-        </div>
+      <div class="depoimento-video">
+        <video controls playsinline>
+          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb0647/main.m3u8" type="application/x-mpegURL">
+        </video>
       </div>
-
+      <div class="depoimento-video">
+        <video controls playsinline>
+          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70aa0e544789ceb0651/main.m3u8" type="application/x-mpegURL">
+        </video>
+      </div>
     </div>
+</div>
   </div>
 </section>
 
@@ -1114,6 +1100,22 @@
       animatedElements.forEach(element => observer.observe(element));
     }
   })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var videos = document.querySelectorAll('.depoimento-video video');
+    videos.forEach(function(video) {
+      var source = video.querySelector('source').src;
+      if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(source);
+        hls.attachMedia(video);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = source;
+      }
+    });
+  });
 </script>
 </body>
 </html>
