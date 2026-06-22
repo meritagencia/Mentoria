@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MDLHX9NX');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude para Empresas | Time de Alta Performance</title>
+  <meta name="description" content="Treinamento ao vivo e personalizado para empresas que querem aplicar Claude nas tarefas reais de cada departamento." />
+  <style>
+    :root {
+      --bg: #000;
+      --bg-soft: #050505;
+      --panel: #0d0d0d;
+      --panel-2: #141414;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(249, 115, 22, 0.28);
+      --text: #fff7ed;
+      --muted: #a3a3a3;
+      --muted-2: #737373;
+      --orange: #f97316;
+      --orange-soft: #fdba74;
+      --clay: #cc785c;
+      --purple: #7c6af7;
+      --green: #22c55e;
+      --radius: 18px;
+      --shadow: 0 30px 120px rgba(249, 115, 22, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(249, 115, 22, 0.20), transparent 34rem),
+        radial-gradient(circle at 80% 20%, rgba(124, 106, 247, 0.12), transparent 28rem),
+        linear-gradient(180deg, #050505 0%, #000 35%, #050505 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1), clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .word { display: inline-block; white-space: nowrap; }
+    .char.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .animate-on-scroll {
+      opacity: 0.01;
+      filter: blur(10px);
+      transform: translateY(24px);
+      transition: opacity 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .animate-on-scroll.in-view {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    @keyframes rotate-beam {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.76) 72%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .section { padding: 112px 0; position: relative; }
+    .section.tight { padding: 80px 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--orange-soft);
+      border: 1px solid rgba(249, 115, 22, 0.22);
+      background: rgba(249, 115, 22, 0.08);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 18px var(--orange);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo {
+      display: block;
+      width: min(260px, 50vw);
+      height: auto;
+      object-fit: contain;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), #9a3412);
+      box-shadow: 0 0 24px rgba(249, 115, 22, 0.35);
+      font-weight: 800;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav-links a:hover { color: #fff; }
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      padding: 0 22px;
+      font-weight: 650;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.55) 58deg, transparent 118deg);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      animation: rotate-beam 2.2s linear infinite;
+    }
+    .btn:hover::before { opacity: 1; }
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn.primary {
+      border-color: rgba(249, 115, 22, 0.72);
+      color: #111;
+      background: linear-gradient(135deg, #fff7ed, #fdba74 44%, #f97316);
+      box-shadow: 0 0 34px rgba(249, 115, 22, 0.28);
+    }
+    .btn.primary:hover { box-shadow: 0 0 52px rgba(249, 115, 22, 0.42); }
+    .btn.dark { background: #fff; color: #050505; }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 92px);
+      display: grid;
+      place-items: center;
+      padding: 54px 0 72px;
+      overflow: hidden;
+    }
+    .hero-animation-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      pointer-events: none;
+      opacity: 0.22;
+      mask-image: radial-gradient(circle at 50% 35%, black, transparent 76%);
+      -webkit-mask-image: radial-gradient(circle at 50% 35%, black, transparent 76%);
+    }
+    .bg-column {
+      min-height: 100%;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(249, 115, 22, 0), rgba(249, 115, 22, 0.18), rgba(124, 106, 247, 0.10));
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path 1500ms cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .bg-column.active { clip-path: inset(0 0 0 0); }
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 54px;
+      align-items: center;
+    }
+    h1 {
+      margin-top: 22px;
+      max-width: 760px;
+      font-size: clamp(2.7rem, 5.6vw, 5.35rem);
+      line-height: 0.98;
+      font-weight: 500;
+      letter-spacing: -0.055em;
+      color: var(--text);
+    }
+    .gradient-text {
+      display: block;
+      margin-top: 0.08em;
+      color: var(--orange-soft);
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+    }
+    .gradient-text .char { color: var(--orange-soft); }
+    .hero-copy {
+      max-width: 650px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+      font-weight: 350;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .cta-note {
+      margin-top: 14px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .dashboard {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02));
+      box-shadow: var(--shadow);
+      padding: 14px;
+      transform: perspective(1200px) rotateX(7deg) rotateY(-9deg);
+    }
+    .dashboard::before {
+      content: "";
+      position: absolute;
+      inset: -80px -40px;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.22), transparent 62%);
+      filter: blur(24px);
+    }
+    .dash-window {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #080808;
+    }
+    .hero-video {
+      width: 100%;
+      height: clamp(320px, 44vw, 520px);
+      display: block;
+      object-fit: cover;
+      background: #050505;
+    }
+    .dash-top {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #525252; }
+    .dot:nth-child(1) { background: #ef4444; }
+    .dot:nth-child(2) { background: #f59e0b; }
+    .dot:nth-child(3) { background: #22c55e; }
+    .dash-body {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 16px;
+      padding: 18px;
+      min-height: 430px;
+    }
+    .dash-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .dash-label {
+      color: var(--muted-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .dash-title { font-size: 22px; letter-spacing: -0.04em; }
+    .meter {
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 18px;
+      background: #262626;
+      overflow: hidden;
+    }
+    .meter span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--orange), var(--orange-soft));
+    }
+    .task-list { display: grid; gap: 12px; margin-top: 16px; }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .task strong { color: #fff; font-weight: 650; }
+    .status {
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.10);
+      border-radius: 999px;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+    .bars {
+      height: 180px;
+      display: flex;
+      align-items: end;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .bars span {
+      flex: 1;
+      border-radius: 7px 7px 0 0;
+      background: linear-gradient(180deg, rgba(249, 115, 22, 0.96), rgba(249, 115, 22, 0.15));
+      min-height: 32px;
+    }
+
+    .logo-cloud {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 30px 0;
+      overflow: hidden;
+    }
+    .logo-cloud p {
+      text-align: center;
+      color: var(--muted-2);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .logos-marquee {
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .logos {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: scroll-left 42s linear infinite;
+      color: #525252;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+    }
+    .logos:hover { animation-play-state: paused; }
+    .logos-group {
+      display: flex;
+      align-items: center;
+      gap: clamp(44px, 7vw, 96px);
+      padding-right: clamp(44px, 7vw, 96px);
+      flex-shrink: 0;
+    }
+    .logos span {
+      white-space: nowrap;
+      transition: color 180ms ease, opacity 180ms ease;
+    }
+    .logos span:hover {
+      color: var(--orange-soft);
+      opacity: 1;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .problem-section {
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(249, 115, 22, 0.13), transparent 28rem),
+        radial-gradient(circle at 88% 54%, rgba(124, 106, 247, 0.10), transparent 26rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(0, 0, 0, 0));
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+      gap: 64px;
+      align-items: center;
+    }
+    .problem-copy {
+      position: relative;
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018));
+      box-shadow: 0 30px 120px rgba(0, 0, 0, 0.38);
+    }
+    .problem-copy::after {
+      content: "";
+      position: absolute;
+      inset: auto 28px 0 28px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.6), transparent);
+    }
+    .problem-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 26px;
+      color: var(--orange-soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .problem-kicker::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--orange);
+    }
+    .quote-panel .problem-kicker {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .problem-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .problem-stat {
+      min-height: 92px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.28);
+    }
+    .problem-stat strong {
+      display: block;
+      color: #fff;
+      font-size: 1.35rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 550;
+    }
+    .problem-stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .section h2 {
+      margin-top: 18px;
+      max-width: 780px;
+      font-size: clamp(2.2rem, 5vw, 4.9rem);
+      font-weight: 450;
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+    .lead {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.4vw, 1.18rem);
+      max-width: 680px;
+    }
+    .pain-list {
+      display: grid;
+      gap: 16px;
+      position: relative;
+    }
+    .pain-list::before {
+      content: "";
+      position: absolute;
+      left: 27px;
+      top: 40px;
+      bottom: 40px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(249, 115, 22, 0), rgba(249, 115, 22, 0.42), rgba(249, 115, 22, 0));
+    }
+    .pain {
+      position: relative;
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      min-height: 142px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+        #070707;
+      box-shadow: 0 18px 80px rgba(0, 0, 0, 0.28);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+    .pain:hover {
+      transform: translateX(6px);
+      border-color: rgba(249, 115, 22, 0.28);
+      background:
+        linear-gradient(145deg, rgba(249, 115, 22, 0.10), rgba(255, 255, 255, 0.025)),
+        #070707;
+    }
+    .pain-mark {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      border: 1px solid rgba(249, 115, 22, 0.24);
+      background: rgba(249, 115, 22, 0.08);
+      color: var(--orange-soft);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+    .pain p { color: var(--muted); font-size: 15px; line-height: 1.65; }
+    .pain strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+    }
+    .quote-panel {
+      margin-top: 22px;
+      padding: 24px 24px 24px 26px;
+      border: 1px solid rgba(249, 115, 22, 0.20);
+      border-left: 3px solid var(--orange);
+      background:
+        linear-gradient(135deg, rgba(249, 115, 22, 0.10), rgba(255, 255, 255, 0.025));
+      color: var(--muted);
+      border-radius: 18px;
+      line-height: 1.68;
+    }
+    .quote-panel strong { color: #fff; }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 28px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+    .card::before,
+    .pillar::before,
+    .step::before,
+    .testimonial::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0;
+      background: radial-gradient(720px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 42%);
+      transition: opacity 400ms ease;
+    }
+    .card:hover::before,
+    .pillar:hover::before,
+    .step:hover::before,
+    .testimonial:hover::before { opacity: 1; }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(249, 115, 22, 0.32);
+      background: linear-gradient(145deg, rgba(249, 115, 22, 0.10), rgba(255, 255, 255, 0.025));
+    }
+    .card.wide { grid-column: span 2; }
+    .card.tall { min-height: 350px; }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -35% -20%;
+      height: 150px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(249, 115, 22, 0.20);
+      color: var(--orange-soft);
+      background: rgba(249, 115, 22, 0.08);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .card h3 {
+      margin-top: 18px;
+      max-width: 420px;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+    .card p {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .card-media {
+      display: block;
+      width: calc(100% + 56px);
+      max-width: none;
+      height: 190px;
+      object-fit: cover;
+      object-position: center;
+      margin: 28px -28px -28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      opacity: 0.76;
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .pillars {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 0, rgba(249, 115, 22, 0.12), transparent 36rem),
+        #050505;
+    }
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 48px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--line);
+    }
+    .pillar {
+      position: relative;
+      overflow: hidden;
+      min-height: 310px;
+      background: #090909;
+      padding: 28px;
+    }
+    .pillar-num {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .pillar h3 {
+      margin-top: 62px;
+      font-size: 1.65rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+    }
+    .pillar p {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 46px;
+    }
+    .step {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      padding: 26px;
+    }
+    .step-num {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(249, 115, 22, 0.38);
+      border-radius: 50%;
+      color: var(--orange-soft);
+      background: rgba(249, 115, 22, 0.08);
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .step h3 {
+      margin-top: 34px;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+    .step p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .testimonial-wall {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 48px;
+      perspective: 900px;
+    }
+    .testimonial {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+      padding: 26px;
+      min-height: 310px;
+    }
+    .testimonial.center {
+      transform: translateY(-20px);
+      border-color: rgba(249, 115, 22, 0.24);
+      box-shadow: 0 24px 90px rgba(249, 115, 22, 0.12);
+    }
+    .stars { color: #fbbf24; letter-spacing: 0.08em; }
+    .testimonial blockquote {
+      margin-top: 22px;
+      color: #d4d4d4;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+    .person {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .person strong { display: block; font-weight: 650; }
+    .person span { color: var(--muted-2); font-size: 13px; }
+    .instagram-link {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      border: 1px solid rgba(249, 115, 22, 0.26);
+      border-radius: 50%;
+      color: var(--orange-soft);
+      background: rgba(249, 115, 22, 0.08);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+    }
+    .instagram-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(249, 115, 22, 0.72);
+      background: rgba(249, 115, 22, 0.16);
+      color: #fff;
+    }
+    .instagram-link svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .instructor-section {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 18% 24%, rgba(249, 115, 22, 0.14), transparent 28rem),
+        radial-gradient(circle at 88% 46%, rgba(124, 106, 247, 0.08), transparent 24rem),
+        #030303;
+    }
+    .instructor-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: 64px;
+      align-items: center;
+    }
+    .instructor-photo {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 28px;
+      overflow: hidden;
+      background: #080808;
+      box-shadow: 0 30px 120px rgba(0, 0, 0, 0.44);
+    }
+    .instructor-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.44));
+    }
+    .instructor-photo img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .instructor-content h2 {
+      margin-top: 18px;
+      max-width: 850px;
+    }
+    .instructor-bio {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .instructor-bio strong { color: #fff; font-weight: 650; }
+    .instructor-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .instructor-proof div {
+      min-height: 96px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+    .instructor-proof strong {
+      display: block;
+      color: var(--orange-soft);
+      font-size: 1.45rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 650;
+    }
+    .instructor-proof span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 132px 0;
+      border-top: 1px solid var(--line);
+      background:
+        radial-gradient(circle at center, rgba(249, 115, 22, 0.22), transparent 32rem),
+        #000;
+    }
+    .final-cta h2 {
+      margin: 18px auto 0;
+      max-width: 960px;
+      font-size: clamp(2.5rem, 6vw, 5.8rem);
+      font-weight: 450;
+      letter-spacing: -0.07em;
+      line-height: 0.96;
+    }
+    .final-cta p {
+      max-width: 680px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .final-cta .btn { margin-top: 36px; }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #000;
+      padding: 56px 0 34px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 0.7fr);
+      gap: 34px;
+    }
+    .footer p, .footer a, .legal { color: var(--muted-2); font-size: 14px; }
+    .footer .brand-logo {
+      width: min(240px, 58vw);
+    }
+    .footer h4 {
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .footer ul { list-style: none; display: grid; gap: 10px; }
+    .legal {
+      margin-top: 42px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      line-height: 1.7;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(16px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      width: min(760px, 100%);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(249, 115, 22, 0.16), transparent 24rem),
+        linear-gradient(145deg, #151515, #070707);
+      box-shadow: 0 40px 140px rgba(0, 0, 0, 0.72);
+      padding: 34px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+    .modal h3 {
+      font-size: 1.8rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+    }
+    .modal-sub {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .form-progress {
+      margin-top: 24px;
+      display: grid;
+      gap: 10px;
+    }
+    .form-progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+    .progress-track {
+      height: 6px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .progress-fill {
+      width: 25%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #fff7ed, #fdba74, var(--orange));
+      transition: width 220ms ease;
+    }
+    .form {
+      display: grid;
+      gap: 20px;
+      margin-top: 26px;
+    }
+    .form-step {
+      display: none;
+      gap: 16px;
+      animation: formStepIn 220ms ease;
+    }
+    .form-step.active { display: grid; }
+    @keyframes formStepIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .step-heading {
+      padding-bottom: 4px;
+    }
+    .step-heading h4 {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .step-heading p {
+      margin-top: 4px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .field label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 13px;
+      outline: none;
+      background: #050505;
+      color: #fff;
+      padding: 0 14px;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .field input,
+    .field select { height: 48px; }
+    .field textarea {
+      min-height: 112px;
+      padding: 14px;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(249, 115, 22, 0.7);
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.14);
+      background: #070707;
+    }
+    .field.full { grid-column: 1 / -1; }
+    .radio-group,
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .radio-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 54px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 13px;
+      padding: 14px 16px;
+      background: #050505;
+      color: #d4d4d4;
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+    .radio-option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(249, 115, 22, 0.72);
+      background: rgba(249, 115, 22, 0.05);
+    }
+    .radio-option input[type="radio"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .radio-option span {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      color: #f5f5f5;
+      font-weight: 650;
+      line-height: 1.3;
+    }
+    .radio-option span::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.24);
+      background: transparent;
+      box-shadow: inset 0 0 0 4px #050505;
+      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+    .radio-option:has(input:checked) {
+      border-color: var(--orange);
+      background: rgba(249, 115, 22, 0.10);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.18), 0 14px 34px rgba(249, 115, 22, 0.10);
+    }
+    .radio-option:has(input:checked) span::before {
+      border-color: var(--orange);
+      background: var(--orange);
+      box-shadow: inset 0 0 0 4px #050505;
+    }
+    .radio-option:has(input:focus-visible) {
+      border-color: var(--orange-soft);
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.22);
+    }
+    .checkbox-option input[type="checkbox"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .checkbox-option span::before {
+      border-radius: 6px;
+    }
+    .checkbox-option:has(input:checked) {
+      border-color: var(--orange);
+      background: rgba(249, 115, 22, 0.10);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.18), 0 14px 34px rgba(249, 115, 22, 0.10);
+    }
+    .checkbox-option:has(input:checked) span::before {
+      border-color: var(--orange);
+      background:
+        linear-gradient(var(--orange), var(--orange)),
+        #050505;
+      box-shadow: inset 0 0 0 4px #050505;
+    }
+    .conditional-fields {
+      display: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid rgba(249, 115, 22, 0.18);
+      border-radius: 18px;
+      background: rgba(249, 115, 22, 0.045);
+    }
+    .conditional-fields.visible { display: grid; }
+    .form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 2px;
+    }
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+    .field-error {
+      display: none;
+      color: #fdba74;
+      font-size: 12px;
+    }
+    .form.has-error .form-step.active .field-error { display: block; }
+    .form-privacy {
+      text-align: center;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+    .success {
+      display: none;
+      text-align: center;
+      padding: 34px 6px 12px;
+    }
+    .success-mark {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .split,
+      .problem-grid,
+      .instructor-grid,
+      .footer-grid { grid-template-columns: 1fr; }
+      .dashboard { transform: none; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .pillar-grid,
+      .steps,
+      .testimonial-wall { grid-template-columns: 1fr; }
+      .testimonial.center { transform: none; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .nav-inner { height: 76px; }
+      .brand-logo { width: min(190px, 56vw); }
+      .nav .btn { display: none; }
+      .hero { padding-top: 48px; }
+      h1 { font-size: clamp(2.45rem, 13vw, 3.75rem); line-height: 1; }
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .dashboard { padding: 8px; border-radius: 20px; }
+      .dash-body { grid-template-columns: 1fr; min-height: auto; }
+      .bento { grid-template-columns: 1fr; }
+      .card.wide { grid-column: span 1; }
+      .problem-copy { padding: 24px; }
+      .problem-stats { grid-template-columns: 1fr; }
+      .instructor-proof { grid-template-columns: 1fr; }
+      .pain { grid-template-columns: 1fr; }
+      .pain-list::before { display: none; }
+      .section { padding: 82px 0; }
+      .section h2,
+      .final-cta h2 { letter-spacing: -0.055em; }
+      .modal { padding: 28px 20px; }
+      .field-grid,
+      .radio-group,
+      .checkbox-group,
+      .conditional-fields { grid-template-columns: 1fr; }
+      .form-actions { flex-direction: column-reverse; align-items: stretch; }
+      .form-actions .btn { width: 100%; }
+      .hero-animation-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDLHX9NX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a href="#" class="brand" aria-label="Claude para Empresas">
+        <img class="brand-logo" src="assets/claude-empresas-logo.png" alt="Claude para Empresas" />
+      </a>
+      <button class="btn" type="button" onclick="openModal()">Falar com especialista</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-animation-grid" id="bg-grid" aria-hidden="true"></div>
+      <div class="shell hero-grid">
+        <div>
+          <span class="eyebrow">IA empresarial aplicada ao trabalho real</span>
+          <h1 id="hero-title">Seu time já tem o talento.<span class="gradient-text">Falta o sistema que multiplica por 10.</span></h1>
+          <p class="hero-copy">
+            O Claude transforma times comuns em times de alta performance. Não contratando mais pessoas, mas fazendo as que você já tem entregarem no nível que sempre foram capazes.
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary" type="button" onclick="openModal()">Quero construir um time de alta performance</button>
+            <a class="btn" href="#metodo">Ver como funciona</a>
+          </div>
+          <p class="cta-note">Sem compromisso. Um especialista entra em contato em até 24h.</p>
+        </div>
+
+        <div class="dashboard" aria-label="Vídeo animado de gráficos e performance com Claude">
+          <div class="dash-window">
+            <div class="dash-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span style="margin-left: auto;">Claude Performance System</span>
+            </div>
+            <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/de0f55cfb50ed423_690aa51e-05fd-4ee3-9f85-fd7eb6.webp">
+              <source src="assets/chart_videomp_.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-cloud" aria-label="Setores atendidos">
+      <div class="shell">
+        <p>Utilizado por empresas líderes em diferentes setores</p>
+        <div class="logos-marquee">
+          <div class="logos" aria-hidden="true">
+            <div class="logos-group">
+              <span>FINANCEIRO</span>
+              <span>TECNOLOGIA</span>
+              <span>SAÚDE</span>
+              <span>VAREJO</span>
+              <span>LOGÍSTICA</span>
+              <span>EDUCAÇÃO</span>
+            </div>
+            <div class="logos-group">
+              <span>FINANCEIRO</span>
+              <span>TECNOLOGIA</span>
+              <span>SAÚDE</span>
+              <span>VAREJO</span>
+              <span>LOGÍSTICA</span>
+              <span>EDUCAÇÃO</span>
+            </div>
+            <div class="logos-group">
+              <span>FINANCEIRO</span>
+              <span>TECNOLOGIA</span>
+              <span>SAÚDE</span>
+              <span>VAREJO</span>
+              <span>LOGÍSTICA</span>
+              <span>EDUCAÇÃO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem-section" id="problema">
+      <div class="shell problem-grid">
+        <div class="problem-copy">
+          <span class="eyebrow">A realidade do dia a dia</span>
+          <h2>Mas a rotina da empresa costuma contar outra história.</h2>
+          <p class="lead">
+            Não é falta de dedicação. Não é falta de competência. É que o sistema que seu time usa foi construído para outro tempo.
+          </p>
+          <div class="problem-stats" aria-label="Sinais de perda operacional">
+            <div class="problem-stat">
+              <strong>Horas</strong>
+              <span>presas em tarefas repetitivas</span>
+            </div>
+            <div class="problem-stat">
+              <strong>Dias</strong>
+              <span>para relatórios que já nascem velhos</span>
+            </div>
+            <div class="problem-stat">
+              <strong>0x</strong>
+              <span>ganho real quando a rotina não muda</span>
+            </div>
+          </div>
+          <div class="quote-panel">
+            <span class="problem-kicker">Diagnóstico</span><br />
+            <strong>O problema não é o talento.</strong><br />
+            O problema é manter pessoas boas presas em tarefas que já poderiam ser aceleradas, estruturadas ou melhoradas com IA.
+          </div>
+        </div>
+        <div class="pain-list">
+          <article class="pain">
+            <span class="pain-mark">01</span>
+            <p><strong>Horas em análises repetitivas.</strong><br />Seu time passa tempo demais destravando tarefas que não deveriam exigir tanto esforço manual.</p>
+          </article>
+          <article class="pain">
+            <span class="pain-mark">02</span>
+            <p><strong>Relatórios lentos e desatualizados.</strong><br />O que leva um dia inteiro para sair já perde força na semana seguinte.</p>
+          </article>
+          <article class="pain">
+            <span class="pain-mark">03</span>
+            <p><strong>Muito movimento, pouco avanço.</strong><br />Todo mundo correndo, ninguém avançando no ritmo que o potencial da equipe permitiria.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" id="metodo">
+      <div class="shell">
+        <span class="eyebrow">O que é diferente aqui</span>
+        <h2>Com o Claude no seu time, a IA vira prática operacional.</h2>
+        <p class="lead">
+          O Claude não resolve isso sozinho. O que resolve é o seu time aprendendo a usar o Claude do jeito certo, aplicado às tarefas reais de cada área.
+        </p>
+
+        <div class="bento">
+          <article class="card wide tall">
+            <span class="tag">Ao vivo</span>
+            <h3>Treinamento ao vivo, não mais um curso online.</h3>
+            <p>Seu time não assiste vídeo. Pratica em tempo real, com aplicação imediata nas tarefas do próprio departamento. No dia seguinte, já está usando.</p>
+            <video class="card-media" autoplay muted loop playsinline preload="metadata" poster="assets/de0f55cfb50ed423_690aa51e-05fd-4ee3-9f85-fd7eb6.webp" aria-label="Gráficos animados de performance operacional">
+              <source src="assets/chart_videomp_.mp4" type="video/mp4" />
+            </video>
+          </article>
+          <article class="card tall">
+            <span class="tag">Personalizado</span>
+            <h3>Por departamento.</h3>
+            <p>Financeiro aprende com casos do financeiro. Comercial aprende com casos do comercial. Cada área sai com o Claude configurado para o que faz de verdade.</p>
+          </article>
+          <article class="card tall">
+            <span class="tag">Resultado</span>
+            <h3>Premiamos quem performa.</h3>
+            <p>Reconhecemos colaboradores que alcançam crescimento real. Alta performance precisa ser celebrada para virar cultura.</p>
+          </article>
+          <article class="card wide">
+            <span class="tag">Suporte</span>
+            <h3>3 meses de suporte depois do treinamento.</h3>
+            <p>A maioria das empresas implementa, treina e abandona. A gente fica acompanhando, ajustando e garantindo que o resultado apareça.</p>
+          </article>
+          <article class="card wide">
+            <span class="tag">Cultura</span>
+            <h3>Seu time já tem o talento. A gente traz o sistema.</h3>
+            <p>O objetivo não é trocar pessoas por IA. É fazer pessoas boas trabalharem com uma alavanca melhor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pillars">
+      <div class="shell">
+        <span class="eyebrow">Como funciona</span>
+        <h2>De zero a IA funcionando no seu time em 8 horas.</h2>
+        <p class="lead">
+          Não jogamos uma ferramenta na sua mão e sumimos. Toda implementação segue 4 pilares que garantem adoção real, não apenas acesso.
+        </p>
+
+        <div class="pillar-grid">
+          <article class="pillar">
+            <p class="pillar-num">Pilar 01</p>
+            <h3>Mapeamento</h3>
+            <p>Entendemos como cada departamento funciona e identificamos os 3 pontos de maior ganho com Claude no seu contexto.</p>
+          </article>
+          <article class="pillar">
+            <p class="pillar-num">Pilar 02</p>
+            <h3>Imersão</h3>
+            <p>Treinamento presencial e aplicado nas tarefas reais. O time aprende a usar o Claude no próprio trabalho.</p>
+          </article>
+          <article class="pillar">
+            <p class="pillar-num">Pilar 03</p>
+            <h3>Performance</h3>
+            <p>Medimos os resultados e reconhecemos quem performa para criar uma cultura que se sustenta.</p>
+          </article>
+          <article class="pillar">
+            <p class="pillar-num">Pilar 04</p>
+            <h3>Sustentação</h3>
+            <p>3 meses de suporte depois do treinamento para acompanhar, ajustar e manter o resultado vivo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="shell">
+        <span class="eyebrow">Resultados reais</span>
+        <h2>O que dizem quem já passou pelo método.</h2>
+        <p class="lead">Não é promessa genérica. É uma implementação que nasce dos casos reais de cada empresa e mede resultado todo mês.</p>
+
+        <div class="testimonial-wall">
+          <article class="testimonial">
+            <div class="stars">Depoimento</div>
+            <blockquote>"Participar deste curso de I.A foi uma experiência transformadora. Além de ampliar minha visão sobre tecnologia e inovação, o curso mostrou de forma prática como a inteligência artificial pode abrir novas oportunidades e facilitar processos no dia a dia. O conteúdo foi passado com muita clareza, profissionalismo e motivação, despertando ainda mais vontade de aprender e evoluir. Sem dúvidas, é um conhecimento essencial para quem quer crescer e se destacar no futuro."</blockquote>
+            <div class="person">
+              <strong>tiagonisa</strong>
+              <span>Comentário de aluno</span>
+              <a class="instagram-link" href="https://www.instagram.com/p/DYBC9ucEUPB/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Ver depoimento de tiagonisa no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
+          </article>
+          <article class="testimonial center">
+            <div class="stars">Depoimento</div>
+            <blockquote>"Existem muitos cursos de IA, mas poucos conseguem humanizar a tecnologia como este. A experiência presencial permitiu uma sinergia única, onde cada dúvida de um colega se tornava um aprendizado para todos. Essa abordagem cooperativa facilitada pelo professor @miqueias provou que a inteligência artificial só atinge seu potencial máximo quando guiada por uma inteligência coletiva bem alinhada. Foi uma imersão transformadora que elevou o nível técnico e o espírito de equipe de todos os participantes. Obrigado."</blockquote>
+            <div class="person">
+              <strong>smartinstalacao</strong>
+              <span>Comentário de aluno</span>
+              <a class="instagram-link" href="https://www.instagram.com/p/DYBC9ucEUPB/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Ver depoimento de smartinstalacao no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
+          </article>
+          <article class="testimonial">
+            <div class="stars">Depoimento</div>
+            <blockquote>"O curso foi excelente, autodita, aprendi fazer coisas inimaginável! Esse foi um dos melhores investimentos que fiz, contribuí muito para meu crescimento profissional. Jamais imaginei criar programa em uma única aula! Obrigada pelos ensinamentos professor @miqueias.rp!"</blockquote>
+            <div class="person">
+              <strong>glasi.lemes</strong>
+              <span>Comentário de aluna</span>
+              <a class="instagram-link" href="https://www.instagram.com/p/DYBC9ucEUPB/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Ver depoimento de glasi.lemes no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section instructor-section" id="professor">
+      <div class="shell instructor-grid">
+        <div class="instructor-photo">
+          <img src="assets/miqueias-professor.png" alt="Miqueias, professor que conduz o treinamento de Claude para empresas" />
+        </div>
+        <div class="instructor-content">
+          <span class="eyebrow">Quem conduz o treinamento</span>
+          <h2>Quem é o professor que vai conduzir o treinamento?</h2>
+          <div class="instructor-bio">
+            <p><strong>Miqueias não chegou onde está lendo livros de IA, chegou implementando.</strong></p>
+            <p>Fundador da Alta Office Educação e sócio da Agência Merit Company, ele já treinou mais de 50 empresas e desenvolveu mais de 100 projetos de IA aplicada, não em teoria, mas em operações reais de negócios que precisavam de resultado.</p>
+            <p>Com certificações oficiais de Google, Microsoft (MCT, MOS) e Anthropic, fabricante do Claude, uma das IAs mais avançadas do mundo, ele é um dos poucos profissionais no Brasil com domínio técnico validado pelas três maiores forças da tecnologia atual.</p>
+            <p>Mas o que diferencia Miqueias não são os diplomas na parede. É a capacidade de traduzir tecnologia complexa em processos que substituem trabalho manual, eliminam desperdício e geram previsibilidade financeira para quem contrata.</p>
+            <p>Com mais de 6.000 alunos treinados e participação em lançamentos 7 em 7, R$ 1 milhão em 7 dias, como expert, ele aplica o rigor do Marketing Direto à Inteligência Artificial para ajudar empresários a escalarem sem depender de sorte ou de uma equipe gigante.</p>
+          </div>
+          <div class="instructor-proof" aria-label="Experiência do professor">
+            <div>
+              <strong>50+</strong>
+              <span>empresas treinadas</span>
+            </div>
+            <div>
+              <strong>100+</strong>
+              <span>projetos de IA aplicada</span>
+            </div>
+            <div>
+              <strong>6.000+</strong>
+              <span>alunos treinados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" id="passos">
+      <div class="shell">
+        <span class="eyebrow">É simples</span>
+        <h2>Três passos para colocar o Claude no seu time.</h2>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <h3>Preencha o formulário</h3>
+            <p>30 segundos. Só o básico para a gente entender o tamanho do seu time e direcionar para o especialista certo.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <h3>Conversa de diagnóstico</h3>
+            <p>Um especialista entra em contato em até 24h. Sem pitch e sem pressão, só para entender o momento da empresa.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <h3>Treinamento ao vivo</h3>
+            <p>Seu time treinado por departamento, com aplicação imediata. Em um dia, o sistema começa a funcionar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="shell">
+        <span class="eyebrow">Próximo passo</span>
+        <h2>Até quando você vai deixar esse talento operando abaixo do que poderia?</h2>
+        <p>Cada semana sem o sistema certo é uma semana em que seus concorrentes acumulam vantagem. E vantagem composta é difícil de reverter.</p>
+        <button class="btn primary" type="button" onclick="openModal()">Quero transformar meu time agora</button>
+        <p class="cta-note">Sem compromisso · Resposta em até 24h · Treinamento ao vivo com suporte de 3 meses</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="brand">
+            <img class="brand-logo" src="assets/claude-empresas-logo.png" alt="Claude para Empresas" />
+          </a>
+          <p style="margin-top: 18px; max-width: 390px;">Treinamento empresarial para aplicar Claude nas tarefas reais do seu time e criar uma cultura de alta performance com IA.</p>
+        </div>
+        <div>
+          <h4>Método</h4>
+          <ul>
+            <li><a href="#metodo">Treinamento ao vivo</a></li>
+            <li><a href="#metodo">Por departamento</a></li>
+            <li><a href="#passos">Suporte de 3 meses</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#problema">Diagnóstico</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#passos">Próximos passos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><button class="btn" type="button" onclick="openModal()">Falar com especialista</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        Alta Office. Todos direitos reservados | CNPJ: 34.762.478/0001-70
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" onclick="closeModal()" aria-label="Fechar">x</button>
+
+      <div id="formContent">
+        <h3 id="modalTitle">Vamos conversar sobre IA na sua empresa</h3>
+        <p class="modal-sub">Preencha as informações abaixo e nossa equipe irá montar uma proposta personalizada de treinamento corporativo em Claude IA para o seu time.</p>
+
+        <div class="form-progress" aria-hidden="true">
+          <div class="form-progress-top">
+            <span id="stepLabel">Etapa 1 de 4</span>
+            <span id="stepName">Contato</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <form class="form" id="leadForm" novalidate onsubmit="submitForm(event)">
+          <section class="form-step active" data-step="1" data-name="Contato">
+            <div class="step-heading"><h4>Dados do responsável</h4><p>Informações essenciais para o primeiro contato comercial.</p></div>
+            <div class="field-grid">
+              <div class="field"><label for="nome">Nome do responsável</label><input type="text" id="nome" name="nome" placeholder="Ex.: João Silva" data-required /></div>
+              <div class="field"><label for="empresa">Nome da empresa</label><input type="text" id="empresa" name="empresa" placeholder="Ex.: Empresa XPTO" data-required /></div>
+              <div class="field"><label for="email">E-mail corporativo</label><input type="email" id="email" name="email" placeholder="nome@empresa.com.br" data-required /></div>
+              <div class="field"><label for="whatsapp">WhatsApp para contato</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" data-required /></div>
+            </div>
+            <p class="field-error">Preencha os campos desta etapa e use um e-mail corporativo. Não aceitamos Gmail, Outlook, iCloud ou Hotmail.</p>
+          </section>
+
+          <section class="form-step" data-step="2" data-name="Empresa">
+            <div class="step-heading"><h4>Qualificação da oportunidade</h4><p>Ajuda nossa equipe a identificar decisores e potencial do projeto.</p></div>
+            <div class="field-grid">
+              <div class="field"><label for="cargo">Cargo do responsável</label><select id="cargo" name="cargo" data-required><option value="" selected>Selecione</option><option>Sócio / CEO / Proprietário</option><option>Diretor</option><option>Gerente / Coordenador</option><option>RH / Treinamento</option><option>Analista / Operacional</option><option>Outro</option></select></div>
+              <div class="field"><label for="segmento">Segmento da empresa</label><select id="segmento" name="segmento" data-required><option value="" selected>Selecione</option><option>Serviços</option><option>Comércio / Varejo</option><option>Indústria</option><option>Tecnologia</option><option>Agronegócio</option><option>Saúde</option><option>Educação</option><option>Financeiro</option><option>Imobiliário / Construção</option><option>Outro</option></select></div>
+            </div>
+            <div class="field"><label>Você participa da decisão de contratação?</label><div class="radio-group">
+              <label class="radio-option"><input type="radio" name="decisao" value="Sim, sou o decisor final" data-required /><span>Sim, sou o decisor final</span></label>
+              <label class="radio-option"><input type="radio" name="decisao" value="Participo da decisão" /><span>Participo da decisão</span></label>
+              <label class="radio-option"><input type="radio" name="decisao" value="Preciso validar com outros responsáveis" /><span>Preciso validar com outros responsáveis</span></label>
+            </div></div>
+            <p class="field-error">Selecione as informações de qualificação para continuar.</p>
+          </section>
+
+          <section class="form-step" data-step="3" data-name="IA e formato">
+            <div class="step-heading"><h4>Maturidade em IA e formato desejado</h4><p>Mostre onde sua empresa está hoje e como prefere treinar o time.</p></div>
+            <div class="field"><label>A empresa já utiliza IA?</label><div class="radio-group">
+              <label class="radio-option"><input type="radio" name="maturidadeIA" value="Sim, usamos diariamente" data-required /><span>Sim, usamos diariamente</span></label>
+              <label class="radio-option"><input type="radio" name="maturidadeIA" value="Sim, mas ainda de forma limitada" /><span>Sim, mas ainda de forma limitada</span></label>
+              <label class="radio-option"><input type="radio" name="maturidadeIA" value="Estamos avaliando" /><span>Estamos avaliando</span></label>
+              <label class="radio-option"><input type="radio" name="maturidadeIA" value="Ainda não utilizamos" /><span>Ainda não utilizamos</span></label>
+            </div></div>
+            <div class="field"><label for="ferramentaIA">Qual ferramenta de IA vocês utilizam hoje? <span style="color: var(--muted-2);">Opcional</span></label><input type="text" id="ferramentaIA" name="ferramentaIA" placeholder="Ex.: ChatGPT, Claude, Gemini, Copilot..." /></div>
+            <div class="field"><label>Qual formato de treinamento desejado?</label><div class="radio-group">
+              <label class="radio-option"><input type="radio" name="formato" value="100% Presencial" data-required /><span>100% Presencial</span></label>
+              <label class="radio-option"><input type="radio" name="formato" value="Ao vivo online" /><span>Ao vivo online</span></label>
+              <label class="radio-option"><input type="radio" name="formato" value="100% Online gravado" /><span>100% Online gravado</span></label>
+              <label class="radio-option"><input type="radio" name="formato" value="Híbrido" /><span>Híbrido</span></label>
+            </div></div>
+            <div class="conditional-fields" id="locationFields">
+              <div class="field"><label for="cidadeTreinamento">Cidade do treinamento</label><input type="text" id="cidadeTreinamento" name="cidadeTreinamento" placeholder="Ex.: São Paulo - SP" disabled /></div>
+              <div class="field"><label for="estadoTreinamento">Estado</label><select id="estadoTreinamento" name="estadoTreinamento" disabled><option value="" selected>Selecione</option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select></div>
+            </div>
+            <p class="field-error">Informe a maturidade e o formato desejado para continuar.</p>
+          </section>
+
+          <section class="form-step" data-step="4" data-name="Projeto">
+            <div class="step-heading"><h4>Escopo e urgência</h4><p>Últimos detalhes para personalizar a proposta comercial.</p></div>
+            <div class="field"><label>Quantas pessoas participarão do treinamento?</label><div class="radio-group">
+              <label class="radio-option"><input type="radio" name="participantes" value="Até 5 pessoas" data-required /><span>Até 5 pessoas</span></label>
+              <label class="radio-option"><input type="radio" name="participantes" value="6 a 15 pessoas" /><span>6 a 15 pessoas</span></label>
+              <label class="radio-option"><input type="radio" name="participantes" value="16 a 30 pessoas" /><span>16 a 30 pessoas</span></label>
+              <label class="radio-option"><input type="radio" name="participantes" value="Mais de 30 pessoas" /><span>Mais de 30 pessoas</span></label>
+            </div></div>
+            <div class="field"><label>Principal objetivo do treinamento</label><div class="checkbox-group">
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Automatizar processos" data-required-group="objetivos" /><span>Automatizar processos</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Aumentar produtividade" /><span>Aumentar produtividade</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Capacitar equipe" /><span>Capacitar equipe</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Atendimento com IA" /><span>Atendimento com IA</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Marketing e conteúdo" /><span>Marketing e conteúdo</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Vendas" /><span>Vendas</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Implantar IA na empresa" /><span>Implantar IA na empresa</span></label>
+              <label class="radio-option checkbox-option"><input type="checkbox" name="objetivos" value="Outro" /><span>Outro</span></label>
+            </div></div>
+            <div class="field-grid">
+              <div class="field"><label for="nivelEquipe">Qual o nível atual da equipe com IA?</label><select id="nivelEquipe" name="nivelEquipe" data-required><option value="" selected>Selecione</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div>
+              <div class="field"><label for="urgencia">Existe urgência para implantação?</label><select id="urgencia" name="urgencia" data-required><option value="" selected>Selecione</option><option>Imediato</option><option>Próximos 30 dias</option><option>Próximos 90 dias</option><option>Apenas pesquisando</option></select></div>
+              <div class="field full"><label for="necessidade">Existe alguma necessidade específica?</label><textarea id="necessidade" name="necessidade" placeholder="Descreva rapidamente o cenário da sua empresa e o que vocês desejam alcançar com IA."></textarea></div>
+            </div>
+            <p class="field-error">Complete os campos obrigatórios para enviar.</p>
+          </section>
+
+          <div class="form-actions">
+            <button class="btn secondary" type="button" id="prevStep">Voltar</button>
+            <button class="btn primary" type="button" id="nextStep">Continuar</button>
+            <button class="btn primary" type="submit" id="submitLead" style="display: none;">Quero receber uma proposta personalizada</button>
+          </div>
+          <p class="form-privacy">Seus dados são confidenciais e utilizados apenas para contato comercial.</p>
+        </form>
+      </div>
+
+      <div class="success" id="successContent">
+        <div class="success-mark">✓</div>
+        <h3>Recebemos seu contato!</h3>
+        <p class="modal-sub">Um especialista entra em contato em até <strong>24 horas úteis</strong> para entender o momento da sua empresa e mostrar como o método pode transformar seu time.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCleanAnimations() {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const bgGrid = document.getElementById("bg-grid");
+      if (bgGrid) {
+        const columnCount = window.innerWidth < 640 ? 6 : 12;
+        for (let index = 0; index < columnCount; index += 1) {
+          const column = document.createElement("div");
+          column.className = "bg-column";
+          bgGrid.appendChild(column);
+          window.setTimeout(() => column.classList.add("active"), 120 + index * 90);
+        }
+      }
+
+      const title = document.getElementById("hero-title");
+      if (title) {
+        let charIndex = 0;
+        const splitTextNode = node => {
+          const fragment = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach(token => {
+            if (!token) return;
+            if (/^\s+$/.test(token)) {
+              fragment.appendChild(document.createTextNode(token));
+              return;
+            }
+            const word = document.createElement("span");
+            word.className = "word";
+            token.split("").forEach(char => {
+              const span = document.createElement("span");
+              span.className = "char";
+              span.textContent = char;
+              span.style.transitionDelay = `${Math.min(charIndex * 24, 1200)}ms`;
+              charIndex += 1;
+              word.appendChild(span);
+            });
+            fragment.appendChild(word);
+          });
+          node.replaceWith(fragment);
+        };
+
+        const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(splitTextNode);
+
+        window.setTimeout(() => {
+          title.querySelectorAll(".char").forEach(char => char.classList.add("revealed"));
+        }, prefersReducedMotion ? 0 : 120);
+      }
+
+      const animatedSelectors = [
+        ".hero .eyebrow",
+        ".hero-copy",
+        ".hero-actions",
+        ".cta-note",
+        ".dashboard",
+        ".logo-cloud p",
+        ".logos-marquee",
+        ".section .eyebrow",
+        ".section h2",
+        ".lead",
+        ".problem-stat",
+        ".quote-panel",
+        ".problem-kicker",
+        ".pain",
+        ".card",
+        ".pillar",
+        ".testimonial",
+        ".step",
+        ".final-cta .eyebrow",
+        ".final-cta h2",
+        ".final-cta p",
+        ".final-cta .btn",
+        ".footer-grid > div",
+        ".legal"
+      ];
+
+      const animatedElements = document.querySelectorAll(animatedSelectors.join(","));
+      animatedElements.forEach((element, index) => {
+        element.classList.add("animate-on-scroll");
+        element.style.transitionDelay = `${Math.min((index % 6) * 70, 350)}ms`;
+        if (element.closest(".hero")) element.classList.add("in-view");
+      });
+
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        animatedElements.forEach(element => element.classList.add("in-view"));
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+        animatedElements.forEach(element => observer.observe(element));
+      }
+
+      const flashlightElements = document.querySelectorAll(".card, .pillar, .step, .testimonial");
+      window.addEventListener("pointermove", event => {
+        flashlightElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          element.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+          element.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+        });
+      }, { passive: true });
+    })();
+
+    const modalOverlay = document.getElementById("modalOverlay");
+    const formContent = document.getElementById("formContent");
+    const successContent = document.getElementById("successContent");
+    const leadForm = document.getElementById("leadForm");
+    const formSteps = Array.from(document.querySelectorAll(".form-step"));
+    const prevStepButton = document.getElementById("prevStep");
+    const nextStepButton = document.getElementById("nextStep");
+    const submitLeadButton = document.getElementById("submitLead");
+    const progressFill = document.getElementById("progressFill");
+    const stepLabel = document.getElementById("stepLabel");
+    const stepName = document.getElementById("stepName");
+    const locationFields = document.getElementById("locationFields");
+    const locationInputs = Array.from(locationFields.querySelectorAll("input, select"));
+    let currentStep = 0;
+
+    function updateStep() {
+      formSteps.forEach((step, index) => step.classList.toggle("active", index === currentStep));
+      const activeStep = formSteps[currentStep];
+      const progress = ((currentStep + 1) / formSteps.length) * 100;
+      progressFill.style.width = `${progress}%`;
+      stepLabel.textContent = `Etapa ${currentStep + 1} de ${formSteps.length}`;
+      stepName.textContent = activeStep.dataset.name;
+      prevStepButton.style.visibility = currentStep === 0 ? "hidden" : "visible";
+      nextStepButton.style.display = currentStep === formSteps.length - 1 ? "none" : "inline-flex";
+      submitLeadButton.style.display = currentStep === formSteps.length - 1 ? "inline-flex" : "none";
+      leadForm.classList.remove("has-error");
+    }
+
+    function validateStep() {
+      const activeStep = formSteps[currentStep];
+      const requiredFields = Array.from(activeStep.querySelectorAll("[data-required]"));
+      const requiredGroups = [...new Set(Array.from(activeStep.querySelectorAll("[data-required-group]")).map(input => input.dataset.requiredGroup))];
+      const blockedEmailDomains = ["gmail.com", "outlook.com", "icloud.com", "hotmail.com"];
+      const fieldsValid = requiredFields.every(field => {
+        if (field.disabled) return true;
+        if (field.type === "radio") return Boolean(activeStep.querySelector(`input[name="${field.name}"]:checked`));
+        if (field.type === "email") {
+          const value = field.value.trim().toLowerCase();
+          const domain = value.split("@")[1] || "";
+          return Boolean(value) && field.checkValidity() && !blockedEmailDomains.includes(domain);
+        }
+        return Boolean(field.value.trim());
+      });
+      const groupsValid = requiredGroups.every(group => Boolean(activeStep.querySelector(`input[name="${group}"]:checked`)));
+      const valid = fieldsValid && groupsValid;
+      leadForm.classList.toggle("has-error", !valid);
+      return valid;
+    }
+
+    function updateLocationFields() {
+      const format = document.querySelector("input[name='formato']:checked")?.value;
+      const needsLocation = format === "100% Presencial" || format === "Híbrido";
+      locationFields.classList.toggle("visible", needsLocation);
+      locationInputs.forEach(input => {
+        input.disabled = !needsLocation;
+        input.toggleAttribute("data-required", needsLocation);
+        if (!needsLocation) input.value = "";
+      });
+    }
+
+    document.querySelectorAll("input[name='formato']").forEach(input => {
+      input.addEventListener("change", updateLocationFields);
+    });
+
+    nextStepButton.addEventListener("click", () => {
+      if (!validateStep()) return;
+      currentStep = Math.min(currentStep + 1, formSteps.length - 1);
+      updateStep();
+    });
+
+    prevStepButton.addEventListener("click", () => {
+      currentStep = Math.max(currentStep - 1, 0);
+      updateStep();
+    });
+
+    function openModal() {
+      if (successContent.style.display === "block") {
+        leadForm.reset();
+        currentStep = 0;
+        updateLocationFields();
+        formContent.style.display = "block";
+        successContent.style.display = "none";
+      }
+      modalOverlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      updateStep();
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function closeModalOutside(event) {
+      if (event.target === modalOverlay) closeModal();
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    async function submitForm(event) {
+      event.preventDefault();
+      if (!validateStep()) return;
+      submitLeadButton.disabled = true;
+      submitLeadButton.textContent = "Enviando...";
+      const formData = new FormData(leadForm);
+      const data = {};
+      formData.forEach((value, key) => {
+        if (data[key]) data[key] = `${data[key]}, ${value}`;
+        else data[key] = value;
+      });
+      const payload = {
+        origem: "LP Claude Empresas",
+        pagina: window.location.href,
+        enviadoEm: new Date().toISOString(),
+        ...data
+      };
+
+      try {
+        await fetch("https://merit-n8n.jcspip.easypanel.host/webhook/empresa-lp-claude", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        console.log("Lead enviado:", payload);
+        window.location.href = "obrigado.html";
+      } catch (error) {
+        console.error("Erro ao enviar lead:", error);
+        alert("Não foi possível enviar seus dados agora. Tente novamente em alguns instantes.");
+      } finally {
+        submitLeadButton.disabled = false;
+        submitLeadButton.textContent = "Quero receber uma proposta personalizada";
+      }
+    }
+
+    updateStep();
+  </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MDLHX9NX');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado! | Claude para Empresas</title>
+  <meta name="description" content="Agradecemos pelas suas informações. Nosso time de especialistas entrará em contato em breve." />
+  <style>
+    :root {
+      --bg: #000;
+      --bg-soft: #050505;
+      --panel: #0d0d0d;
+      --panel-2: #141414;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(249, 115, 22, 0.28);
+      --text: #fff7ed;
+      --muted: #a3a3a3;
+      --muted-2: #737373;
+      --orange: #f97316;
+      --orange-soft: #fdba74;
+      --radius: 18px;
+      --shadow: 0 30px 120px rgba(249, 115, 22, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(249, 115, 22, 0.20), transparent 34rem),
+        radial-gradient(circle at 80% 20%, rgba(124, 106, 247, 0.12), transparent 28rem),
+        linear-gradient(180deg, #050505 0%, #000 35%, #050505 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.76) 72%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; outline: none; }
+    
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(18px);
+      width: 100%;
+    }
+    .nav-inner {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo {
+      display: block;
+      width: min(260px, 50vw);
+      height: auto;
+      object-fit: contain;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      padding: 0 26px;
+      font-weight: 650;
+      font-size: 14px;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+    @keyframes rotate-beam {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.55) 58deg, transparent 118deg);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      animation: rotate-beam 2.2s linear infinite;
+    }
+    .btn:hover::before { opacity: 1; }
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn.primary {
+      border-color: rgba(249, 115, 22, 0.72);
+      color: #111;
+      background: linear-gradient(135deg, #fff7ed, #fdba74 44%, #f97316);
+      box-shadow: 0 0 34px rgba(249, 115, 22, 0.28);
+    }
+    .btn.primary:hover { box-shadow: 0 0 52px rgba(249, 115, 22, 0.42); }
+
+    .thank-you-section {
+      position: relative;
+      flex-grow: 1;
+      display: grid;
+      place-items: center;
+      padding: 60px 0 80px;
+      overflow: hidden;
+    }
+
+    .hero-animation-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      pointer-events: none;
+      opacity: 0.22;
+      mask-image: radial-gradient(circle at 50% 50%, black, transparent 76%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 76%);
+    }
+    .bg-column {
+      min-height: 100%;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(249, 115, 22, 0), rgba(249, 115, 22, 0.18), rgba(124, 106, 247, 0.10));
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path 1500ms cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .bg-column.active { clip-path: inset(0 0 0 0); }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 780px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--orange-soft);
+      border: 1px solid rgba(249, 115, 22, 0.22);
+      background: rgba(249, 115, 22, 0.08);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 18px #22c55e;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4.8vw, 4.3rem);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      color: var(--text);
+      max-width: 680px;
+    }
+    .gradient-text {
+      display: block;
+      margin-top: 0.08em;
+      color: var(--orange-soft);
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+    }
+    .gradient-text .char { color: var(--orange-soft); }
+
+    .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1), clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .word { display: inline-block; white-space: nowrap; }
+    .char.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .animate-on-scroll {
+      opacity: 0.01;
+      filter: blur(10px);
+      transform: translateY(24px);
+      transition: opacity 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .animate-on-scroll.in-view {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .info-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 36px 28px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+      box-shadow: var(--shadow);
+      max-width: 580px;
+      width: 100%;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+    .info-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0;
+      background: radial-gradient(720px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 42%);
+      transition: opacity 400ms ease;
+    }
+    .info-card:hover::before { opacity: 1; }
+    .info-card:hover {
+      border-color: rgba(249, 115, 22, 0.32);
+      background: linear-gradient(145deg, rgba(249, 115, 22, 0.10), rgba(255, 255, 255, 0.025));
+    }
+    .info-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -35% -20%;
+      height: 150px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .success-mark {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .info-card strong {
+      color: #fff;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #000;
+      padding: 32px 0;
+      width: 100%;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer p, .legal { color: var(--muted-2); font-size: 13px; }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-animation-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .info-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDLHX9NX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a href="lp-oficial-empresas.html" class="brand" aria-label="Voltar para Claude para Empresas">
+        <img class="brand-logo" src="assets/claude-empresas-logo.png" alt="Claude para Empresas" />
+      </a>
+    </div>
+  </nav>
+
+  <main class="thank-you-section">
+    <div class="hero-animation-grid" id="bg-grid" aria-hidden="true"></div>
+    <div class="shell content-wrapper">
+      <span class="eyebrow">Recebemos seu contato comercial</span>
+      <h1 id="hero-title">Obrigado pelo seu contato!<span class="gradient-text">Seu time está mais perto da alta performance.</span></h1>
+      
+      <div class="info-card animate-on-scroll">
+        <div class="success-mark">✓</div>
+        <p>
+          Nosso time de especialistas já foi notificado. Em até <strong>24 horas úteis</strong>, entraremos em contato com você via e-mail corporativo ou WhatsApp para apresentar sua proposta personalizada e agendar o diagnóstico do seu time.
+        </p>
+      </div>
+
+      <div class="actions animate-on-scroll">
+        <a href="lp-oficial-empresas.html" class="btn primary">Voltar para a página principal</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="legal">
+        Alta Office. Todos direitos reservados | CNPJ: 34.762.478/0001-70
+      </div>
+      <p class="legal">Suporte corporativo em Claude IA</p>
+    </div>
+  </footer>
+
+  <script>
+    (function initThankYouPage() {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // 1. Column background stagger animation
+      const bgGrid = document.getElementById("bg-grid");
+      if (bgGrid) {
+        const columnCount = window.innerWidth < 640 ? 6 : 12;
+        for (let index = 0; index < columnCount; index += 1) {
+          const column = document.createElement("div");
+          column.className = "bg-column";
+          bgGrid.appendChild(column);
+          window.setTimeout(() => column.classList.add("active"), 120 + index * 90);
+        }
+      }
+
+      // 2. Splitting hero title text for reveal animation
+      const title = document.getElementById("hero-title");
+      if (title) {
+        let charIndex = 0;
+        const splitTextNode = node => {
+          const fragment = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach(token => {
+            if (!token) return;
+            if (/^\s+$/.test(token)) {
+              fragment.appendChild(document.createTextNode(token));
+              return;
+            }
+            const word = document.createElement("span");
+            word.className = "word";
+            token.split("").forEach(char => {
+              const span = document.createElement("span");
+              span.className = "char";
+              span.textContent = char;
+              span.style.transitionDelay = `${Math.min(charIndex * 24, 1200)}ms`;
+              charIndex += 1;
+              word.appendChild(span);
+            });
+            fragment.appendChild(word);
+          });
+          node.replaceWith(fragment);
+        };
+
+        const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(splitTextNode);
+
+        window.setTimeout(() => {
+          title.querySelectorAll(".char").forEach(char => char.classList.add("revealed"));
+        }, prefersReducedMotion ? 0 : 120);
+      }
+
+      // 3. Staggered animations for scroll/fade elements
+      const animatedSelectors = [
+        ".thank-you-section .eyebrow",
+        ".info-card",
+        ".actions",
+        ".legal"
+      ];
+      const animatedElements = document.querySelectorAll(animatedSelectors.join(","));
+      animatedElements.forEach((element, index) => {
+        element.classList.add("animate-on-scroll");
+        element.style.transitionDelay = `${Math.min((index % 4) * 100, 400)}ms`;
+        element.classList.add("in-view"); // All in one fold, animate immediately
+      });
+
+      // 4. Flashlight pointer hover tracking
+      const flashlightElements = document.querySelectorAll(".info-card");
+      window.addEventListener("pointermove", event => {
+        flashlightElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          element.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+          element.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+        });
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
