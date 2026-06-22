@@ -668,6 +668,74 @@
   }
 
 
+  /* ---- GALERIA BENTO ---- */
+  .bento-section {
+    padding: 120px 0;
+    background: #05081C;
+    position: relative;
+    border-top: 1px solid rgba(180,157,106,0.15);
+  }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 240px;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .bento-item {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--navy);
+    border: 1px solid rgba(180,157,106,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .bento-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(180,157,106,0.5);
+    box-shadow: 0 15px 40px rgba(180,157,106,0.15);
+    z-index: 2;
+  }
+  .bento-item img, .bento-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+    transition: transform 0.8s ease;
+  }
+  .bento-item:hover img, .bento-item:hover video {
+    transform: scale(1.04);
+  }
+  .item-wide { grid-column: span 2; }
+  .item-tall { grid-row: span 2; }
+
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 200px;
+    }
+  }
+  @media (max-width: 600px) {
+    .bento-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bento-item {
+      height: 300px;
+      transform: none !important;
+    }
+    .item-tall {
+      height: 500px;
+    }
+    .bento-item:hover img, .bento-item:hover video {
+      transform: none;
+    }
+  }
+
   /* ---- DEPOIMENTOS ---- */
   .depoimentos-section {
     padding: 120px 0;
@@ -709,12 +777,12 @@
 
   @media (max-width: 768px) {
     .hero {
-      background: linear-gradient(135deg, rgba(11, 16, 56, 0.92) 0%, rgba(11, 16, 56, 0.3) 100%), url('TOPO%20MOBILE2.png') center 60px / cover no-repeat;
+      background: linear-gradient(135deg, rgba(11, 16, 56, 0.92) 0%, rgba(11, 16, 56, 0.3) 100%), url('TOPO%20MOBILE3.png') center 60px / cover no-repeat;
     }
     .container { padding: 0 20px; }
     .hero-content { padding: 130px 20px 40px; }
     .hero-eyebrow { font-size: 9.5px; padding: 6px 10px; letter-spacing: 0.1em; margin-bottom: 12px; }
-    .hero h1 { font-size: clamp(28px, 8vw, 36px); margin-bottom: 16px; line-height: 1; }
+    .hero h1 { font-size: clamp(18px, 6vw, 26px); margin-bottom: 16px; line-height: 1.15; }
     .hero-subtext { font-size: 14px; margin-bottom: 24px; line-height: 1.4; }
     .btn-primary { padding: 14px 24px; font-size: 10.5px; letter-spacing: 0.08em; }
     nav .brand span { display: none; }
@@ -779,10 +847,10 @@
       </p>
       
       <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
-        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500;"><span style="color: var(--gold); font-size: 18px;">✔</span> Atendimento individual</div>
-        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500;"><span style="color: var(--gold); font-size: 18px;">✔</span> Pacientes reais</div>
-        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500;"><span style="color: var(--gold); font-size: 18px;">✔</span> 6 meses de acompanhamento</div>
-        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500;"><span style="color: var(--gold); font-size: 18px;">✔</span> Protocolo baseado em evidência científica</div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px;">✔</span> Atendimento individual</div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px;">✔</span> Pacientes reais</div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px;">✔</span> 6 meses de acompanhamento</div>
+        <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px; flex-shrink: 0;">✔</span> <span>Protocolo baseado em evidência científica</span></div>
       </div>
       <div class="hero-actions">
         <a href="#dor" class="btn-primary">Quero minha vaga</a>
@@ -980,6 +1048,47 @@
       <div class="pilar animate-on-scroll" style="padding: 32px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <span style="color: var(--gold); font-size: 24px; margin-bottom: 12px;">✔</span>
         <div class="pilar-title" style="font-size: 16px;">Acompanhamento em cirurgias hospitalares</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA BASTIDORES -->
+<section id="bastidores" class="bento-section">
+  <div class="container">
+    <div class="animate-on-scroll" style="text-align: center; margin-bottom: 64px;">
+      <div class="dor-label" style="justify-content: center; margin-bottom: 16px;">BASTIDORES</div>
+      <h2 class="section-title">Experiências Reais da Mentoria</h2>
+      <p class="section-sub" style="margin: 0 auto; max-width: 600px;">Confira a energia de quem está com a mão na massa e transformando sua carreira na prática.</p>
+    </div>
+
+    <div class="bento-grid animate-on-scroll">
+      <div class="bento-item item-wide">
+        <img src="IMG_5999.jpeg" alt="Bastidores da Mentoria" loading="lazy">
+      </div>
+      <div class="bento-item item-tall">
+        <video src="IMG_7625.MOV" autoplay muted loop playsinline></video>
+      </div>
+      <div class="bento-item item-normal">
+        <img src="IMG_7633.jpeg" alt="Bastidores" loading="lazy">
+      </div>
+      <div class="bento-item item-normal">
+        <video src="IMG_7629.MOV" autoplay muted loop playsinline></video>
+      </div>
+      <div class="bento-item item-tall">
+        <video src="IMG_7626.MOV" autoplay muted loop playsinline></video>
+      </div>
+      <div class="bento-item item-normal">
+        <img src="IMG_7634.jpeg" alt="Bastidores" loading="lazy">
+      </div>
+      <div class="bento-item item-normal">
+        <video src="IMG_7631.MOV" autoplay muted loop playsinline></video>
+      </div>
+      <div class="bento-item item-wide">
+        <video src="IMG_7632.MOV" autoplay muted loop playsinline></video>
+      </div>
+      <div class="bento-item item-wide">
+        <img src="foto com aluna e certificado (1).jpg" alt="Entrega de Certificado" loading="lazy">
       </div>
     </div>
   </div>
