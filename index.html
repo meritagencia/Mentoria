@@ -455,129 +455,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: rgba(255,255,255,0.5);
   }
 
-  /* ---- INVESTIMENTO ---- */
-  .invest-section {
-    padding: 120px 0;
-    background: #000000;
-  }
-  .invest-inner {
-    display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;
-  }
-  .invest-card {
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(253,207,91,0.4);
-    border-radius: 28px;
-    padding: 60px 48px;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(253,207,91,0.1);
-  }
-  .invest-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  }
-  .invest-tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 32px;
-  }
-  .invest-price-main {
-    font-family: var(--font-display);
-    font-size: 72px; font-weight: 300;
-    color: var(--white); line-height: 1;
-    margin-bottom: 8px;
-  }
-  .invest-price-main span {
-    font-size: 32px; color: var(--gold-light);
-  }
-  .invest-price-label {
-    font-size: 12px; font-weight: 400; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.4); text-transform: uppercase;
-    margin-bottom: 32px;
-  }
-  .invest-divider {
-    width: 100%; height: 1px;
-    background: rgba(253,207,91,0.2);
-    margin: 32px 0;
-  }
-  .invest-parcel {
-    font-size: 15px; font-weight: 300;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 8px;
-  }
-  .invest-parcel strong {
-    color: var(--gold-light); font-weight: 500;
-    font-family: var(--font-display); font-size: 24px;
-  }
-  .invest-obs {
-    font-size: 12px; font-weight: 300;
-    color: rgba(255,255,255,0.3);
-    line-height: 1.7; margin-top: 24px;
-  }
-  .invest-obs strong { color: rgba(255,255,255,0.5); }
-  .invest-cta {
-    display: block; text-align: center; margin-top: 40px;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
-    text-transform: uppercase; text-decoration: none;
-    color: #000000;
-    background: var(--gold);
-    padding: 20px;
-    transition: all 0.3s;
-    border-radius: 999px;
-  }
-  .invest-cta:hover { background: var(--gold-light); }
-  .invest-garantia {
-    margin-top: 20px; text-align: center;
-    font-size: 12px; font-weight: 300;
-    color: rgba(255,255,255,0.35);
-  }
-  .invest-side { padding-top: 20px; }
-  .invest-side-title {
-    font-family: var(--font-display);
-    font-size: 36px; font-weight: 300;
-    color: var(--white); margin-bottom: 24px;
-    line-height: 1.2;
-  }
-  .invest-include { list-style: none; margin-bottom: 36px; }
-  .invest-include li {
-    display: flex; gap: 14px; align-items: flex-start;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(253,207,91,0.12);
-    font-size: 14px; font-weight: 300;
-    color: rgba(255,255,255,0.65); line-height: 1.6;
-  }
-  .invest-include li .check {
-    color: var(--gold); flex-shrink: 0;
-    margin-top: 3px; font-size: 16px;
-  }
-  .inscricao-steps { margin-top: 40px; }
-  .step-title {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .step-item {
-    display: flex; gap: 20px; align-items: flex-start;
-    margin-bottom: 20px;
-  }
-  .step-n {
-    font-family: var(--font-display);
-    font-size: 28px; font-weight: 300;
-    color: rgba(253,207,91,0.2); flex-shrink: 0;
-    line-height: 1;
-  }
-  .step-info { }
-  .step-name {
-    font-size: 13px; font-weight: 600;
-    color: var(--white); margin-bottom: 4px;
-  }
-  .step-desc {
-    font-size: 13px; font-weight: 300;
-    color: rgba(255,255,255,0.65); line-height: 1.6;
-  }
+
 
   /* ---- CTA FINAL ---- */
   .cta-final {
@@ -796,7 +674,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hero-subtext { font-size: 14px; margin-bottom: 24px; line-height: 1.4; }
     .btn-primary { padding: 14px 24px; font-size: 10.5px; letter-spacing: 0.08em; }
     nav .brand span { display: none; }
-    .dor-inner, .mentor-inner, .invest-inner { grid-template-columns: 1fr; gap: 48px; }
+    .dor-inner, .mentor-inner { grid-template-columns: 1fr; gap: 48px; }
     .pilares-grid { grid-template-columns: 1fr; }
     .depoimentos-grid {
       display: flex;
@@ -819,7 +697,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bonus-items { flex-direction: column; gap: 20px; }
     nav { padding: 14px 20px; }
     .nav-cta { padding: 8px 16px; font-size: 11px; }
-    .invest-card { padding: 40px 28px; }
   }
 
   details[open] summary ~ * {
@@ -844,7 +721,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAV -->
 <nav class="animate-on-scroll">
   <img src="logobruno.png" alt="Dr. Bruno Noronha" class="brand" style="height: 35px; width: auto; object-fit: contain;">
-  <a href="#investimento" class="nav-cta">Garantir Vaga</a>
 </nav>
 
 <!-- HERO -->
@@ -867,7 +743,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px; flex-shrink: 0;">✔</span> <span>Protocolo baseado em evidência científica</span></div>
       </div>
       <div class="hero-actions">
-        <a href="#dor" class="btn-primary">Quero minha vaga</a>
+        <a href="https://wa.me/556681036769?text=Ol%C3%A1,%20Dr.%20Bruno!%20Tenho%20interesse%20na%20Mentoria%20VIP%20de%20Cirurgia%20Oral%20e%20gostaria%20de%20garantir%20minha%20vaga." class="btn-primary" target="_blank">Quero minha vaga</a>
         <span class="hero-trust">Vagas extremamente limitadas</span>
       </div>
     </div>
@@ -1138,64 +1014,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- INVESTIMENTO -->
-<section class="invest-section" id="investimento">
-  <div class="container">
-    <div class="invest-inner">
-      <div class="invest-card animate-on-scroll">
-        <div class="invest-tag">Investimento — Mentoria VIP</div>
-        <div class="invest-price-main"><span>R$</span> 4.500</div>
-        <div class="invest-price-label">Pagamento à vista</div>
-        <div class="invest-divider"></div>
-        <div class="invest-parcel">Ou em até 12x de <strong>R$ 397,16</strong></div>
-        <div class="invest-obs">
-          <strong>Reserva de vaga:</strong> É necessário pagamento antecipado de R$ 250,00 no momento da inscrição para confirmação de vaga. Este valor não é reembolsado em caso de desistência do aluno.
-        </div>
-        <a href="https://wa.me/556681036769?text=Olá,%20Dr.%20Bruno!%20Tenho%20interesse%20na%20Mentoria%20VIP%20de%20Cirurgia%20Oral%20e%20gostaria%20de%20garantir%20minha%20vaga." class="invest-cta" target="_blank">
-          Garantir Minha Vaga Agora
-        </a>
-        <div class="invest-garantia">Vagas limitadas · Confirmação via WhatsApp</div>
-      </div>
-      <div class="invest-side animate-on-scroll">
-        <h3 class="invest-side-title">O que está incluído na sua Mentoria VIP</h3>
-        <ul class="invest-include">
-          <li><span class="check">✦</span> <strong>Atenção 100% Individual (Não é em turma/grupo)</strong></li>
-          <li><span class="check">✦</span> 1 dia completo de cirurgia demonstrativa e prática clínica</li>
-          <li><span class="check">✦</span> Atendimento a paciente real com supervisão direta</li>
-          <li><span class="check">✦</span> Protocolo cirúrgico baseado em evidência científica</li>
-          <li><span class="check">✦</span> Material cirúrgico disponível durante o curso</li>
-          <li><span class="check">✦</span> Discussão aprofundada de casos clínicos</li>
-          <li><span class="check">✦</span> 6 meses de acompanhamento direto (1 a 1)</li>
-          <li><span class="check">✦</span> Observação de cirurgias na clínica e hospitais</li>
-        </ul>
-        <div class="inscricao-steps">
-          <div class="step-title">Como se inscrever</div>
-          <div class="step-item">
-            <div class="step-n">01</div>
-            <div class="step-info">
-              <div class="step-name">Entre em contato via WhatsApp</div>
-              <div class="step-desc">(66) 9 8103-6769 — tire suas dúvidas e confirme disponibilidade</div>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-n">02</div>
-            <div class="step-info">
-              <div class="step-name">Envie seus documentos</div>
-              <div class="step-desc">Carteira do Conselho (frente e verso) + dados para contrato</div>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-n">03</div>
-            <div class="step-info">
-              <div class="step-name">Confirme sua vaga</div>
-              <div class="step-desc">Realize o pagamento antecipado de R$ 250,00 e sua vaga está garantida</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- FAQ -->
 <section class="faq-section" style="padding: 120px 0; background: #000000;">
@@ -1233,14 +1052,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </details>
       
-      <details style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)); backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(253,207,91,0.2); padding: 24px 32px; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
-        <summary style="font-weight: 600; font-size: 18px; color: var(--white); list-style: none; display: flex; justify-content: space-between; align-items: center;">
-          Quanto custa e como me inscrevo? <span style="color: var(--gold);">+</span>
-        </summary>
-        <div style="margin-top: 16px; font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.8;">
-          O investimento é de R$ 4.500 à vista ou em até 12x de R$ 397,16. Para se inscrever, basta clicar em qualquer botão de "Garantir Minha Vaga" na página, falar diretamente com a equipe pelo WhatsApp e realizar o pagamento de reserva (R$ 250,00).
-        </div>
-      </details>
+
       
     </div>
   </div>
