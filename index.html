@@ -1869,7 +1869,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 
   // Envio da Aplicação e Disparo do Webhook
-  window.handleLeadSubmit = function(e) {
+  window.handleLeadSubmit = async function(e) {
     e.preventDefault();
     const btn = document.getElementById('btn-submit-lead');
     const btnText = document.getElementById('btn-submit-text');
@@ -1914,28 +1914,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // Webhook Make.com
     const webhookUrl = 'https://hook.us2.make.com/f8iapc382rnst26vn2dv7fvehyc4kqww';
+    const redirectUrl = 'obrigado.html?nome=' + encodeURIComponent(nome);
+    const jsonBody = JSON.stringify(payload);
 
+    // Método 1: sendBeacon (sobrevive a redirecionamento de página)
+    var beaconSent = false;
     try {
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        mode: 'no-cors',
-        keepalive: true
-      }).catch(function(err) {
-        console.warn('Webhook notice:', err);
-      });
+      if (navigator.sendBeacon) {
+        var blob = new Blob([jsonBody], { type: 'application/json' });
+        beaconSent = navigator.sendBeacon(webhookUrl, blob);
+        console.log('Beacon enviado:', beaconSent);
+      }
     } catch (err) {
-      console.warn('Webhook dispatch error:', err);
+      console.warn('sendBeacon falhou:', err);
+    }
+
+    // Método 2: fetch como fallback (aguarda resposta antes de redirecionar)
+    if (!beaconSent) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: jsonBody,
+          keepalive: true
+        });
+        console.log('Fetch webhook enviado com sucesso');
+      } catch (err) {
+        console.warn('Fetch webhook erro (dados podem ter sido enviados):', err);
+      }
     }
 
     // Redirecionar para a página de obrigado
-    const redirectUrl = 'obrigado.html?nome=' + encodeURIComponent(nome);
-
+    btnText.textContent = 'Aplicação enviada! Redirecionando...';
     setTimeout(function() {
-      btnText.textContent = 'Aplicação enviada! Redirecionando...';
       window.location.href = redirectUrl;
-    }, 600);
+    }, 800);
   };
 })();
 </script>
