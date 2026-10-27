@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W9CQPWZJ');</script>
-<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mentoria VIP — Dr. Bruno Noronha</title>
+
+<!-- Preload LCP hero image (WebP) -->
+<link rel="preload" as="image" href="Topo2.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" as="image" href="TOPO%20MOBILE2.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+
+<!-- Fonts: non-render-blocking with preload swap -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+<!-- Preconnect to third-party origins -->
+<link rel="preconnect" href="https://video.gumlet.io">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -86,11 +92,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* ---- HERO ---- */
   .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.3) 100%), url('Topo2.png') center/cover no-repeat;
+    background: #000000;
     display: flex; align-items: center;
     position: relative;
     overflow: hidden;
     padding-top: 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero-bg img, .hero-bg-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 1;
   }
   .hero::before {
     content: '';
@@ -98,13 +120,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background: 
       radial-gradient(ellipse at 70% 40%, rgba(253,207,91,0.08) 0%, transparent 60%),
       radial-gradient(ellipse at 10% 80%, rgba(253,207,91,0.05) 0%, transparent 50%);
+    z-index: 2;
   }
   .hero-line {
     position: absolute; left: 0; top: 0; bottom: 0;
     width: 4px;
     background: linear-gradient(180deg, transparent, var(--gold) 30%, var(--gold-light) 70%, transparent);
+    z-index: 2;
   }
-  .hero-inner { display: flex; align-items: center; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+  .hero-inner { display: flex; align-items: center; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 3; }
   .hero-content {
     max-width: 540px;
     padding: 80px 0;
@@ -344,6 +368,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 20px;
     background: linear-gradient(135deg, #111111 0%, #000000 100%);
   }
+  .mentor-photo-placeholder picture,
   .mentor-photo-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .mentor-initials {
     font-family: var(--font-display);
@@ -531,28 +556,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     line-height: 1.6;
   }
 
-  /* ---- ANIMATIONS ADDED FROM REF ---- */
+  /* ---- ANIMATIONS ---- */
   .animate-on-scroll {
     opacity: 0.01;
-    filter: blur(10px);
-    transform: translateY(24px);
-    transition: opacity 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(20px);
+    transition: opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
   }
   .animate-on-scroll.in-view {
     opacity: 1;
-    filter: blur(0);
     transform: translateY(0);
-  }
-  .char {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .word { display: inline-block; white-space: nowrap; padding-bottom: 0.2em; }
-  .char.revealed {
-    opacity: 1;
-    transform: translateY(0);
+    will-change: auto;
   }
 
 
@@ -593,6 +607,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: absolute;
     inset: 0;
     transition: transform 0.8s ease;
+  }
+  .bento-item picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
   .bento-item:hover img, .bento-item:hover video {
     transform: scale(1.04);
@@ -664,9 +684,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* ---- RESPONSIVE ---- */
 
   @media (max-width: 768px) {
-    .hero {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.3) 100%), url('TOPO%20MOBILE2.png') center 60px / cover no-repeat;
-    }
     .container { padding: 0 20px; }
     .hero-content { padding: 130px 20px 40px; }
     .hero-eyebrow { font-size: 9.5px; padding: 6px 10px; letter-spacing: 0.1em; margin-bottom: 12px; }
@@ -719,15 +736,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- NAV -->
-<nav class="animate-on-scroll">
-  <img src="logobruno.png" alt="Dr. Bruno Noronha" class="brand" style="height: 35px; width: auto; object-fit: contain;">
+<nav>
+  <picture>
+    <source srcset="logobruno.webp" type="image/webp">
+    <img src="logobruno.png" alt="Dr. Bruno Noronha" class="brand" style="height: 35px; width: auto; object-fit: contain;" width="120" height="35" loading="eager">
+  </picture>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <!-- LCP: single responsive <picture> with fetchpriority="high" -->
+  <picture class="hero-bg">
+    <source media="(max-width: 768px)" srcset="TOPO%20MOBILE2.webp" type="image/webp">
+    <source media="(max-width: 768px)" srcset="TOPO%20MOBILE2.jpg" type="image/jpeg">
+    <source srcset="Topo2.webp" type="image/webp">
+    <img src="Topo2.jpg" alt="Dr. Bruno Noronha - Mentoria VIP" class="hero-bg-img" fetchpriority="high" decoding="async" width="1600" height="900">
+  </picture>
+  <div class="hero-overlay"></div>
   <div class="hero-line"></div>
   <div class="hero-inner">
-    <div class="hero-content animate-on-scroll">
+    <div class="hero-content">
       <div class="hero-eyebrow">Mentoria VIP</div>
       <h1 id="hero-title" style="font-size: clamp(36px, 4.5vw, 56px);">
         Aprenda a realizar cirurgias orais com <br><em>segurança e previsibilidade</em>
@@ -800,34 +828,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="bento-grid animate-on-scroll">
       <div class="bento-item item-tall">
-        <video data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a3979251fc7362a2ced80b2/main.m3u8" autoplay muted loop playsinline></video>
+        <video data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a3979251fc7362a2ced80b2/main.m3u8" autoplay muted loop playsinline preload="none"></video>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/3F37AE55-13E6-439E-999F-64C95B601D2C.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/3F37AE55-13E6-439E-999F-64C95B601D2C.webp" type="image/webp"><img src="Fotos/3F37AE55-13E6-439E-999F-64C95B601D2C.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/40C3A4A4-63CC-468A-8765-56483115BB3F.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/40C3A4A4-63CC-468A-8765-56483115BB3F.webp" type="image/webp"><img src="Fotos/40C3A4A4-63CC-468A-8765-56483115BB3F.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/IMG_2701.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_2701.webp" type="image/webp"><img src="Fotos/IMG_2701.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-tall">
-        <img src="Fotos/IMG_3144.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_3144.webp" type="image/webp"><img src="Fotos/IMG_3144.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="800"></picture>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/IMG_3150.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_3150.webp" type="image/webp"><img src="Fotos/IMG_3150.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/IMG_3156.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_3156.webp" type="image/webp"><img src="Fotos/IMG_3156.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-wide">
-        <img src="Fotos/IMG_4246.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_4246.webp" type="image/webp"><img src="Fotos/IMG_4246.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="1200" height="400"></picture>
       </div>
       <div class="bento-item item-normal">
-        <img src="Fotos/IMG_4371.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_4371.webp" type="image/webp"><img src="Fotos/IMG_4371.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="600" height="400"></picture>
       </div>
       <div class="bento-item item-wide">
-        <img src="Fotos/IMG_5181.jpg" alt="Experiência da Mentoria" loading="lazy">
+        <picture><source srcset="Fotos/IMG_5181.webp" type="image/webp"><img src="Fotos/IMG_5181.jpg" alt="Experiência da Mentoria" loading="lazy" decoding="async" width="1200" height="400"></picture>
       </div>
     </div>
   </div>
@@ -904,7 +932,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="mentor-photo-wrap animate-on-scroll">
         <div class="mentor-photo-frame">
           <div class="mentor-photo-placeholder">
-            <img src="Bruno Noronha Fundo Branco (95).jpg" alt="Dr. Bruno Noronha">
+            <picture><source srcset="Bruno Noronha Fundo Branco (95).webp" type="image/webp"><img src="Bruno Noronha Fundo Branco (95).jpg" alt="Dr. Bruno Noronha" loading="lazy" decoding="async" width="500" height="667"></picture>
           </div>
         </div>
         <div class="mentor-credentials">
@@ -990,23 +1018,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
         <div class="depoimentos-grid animate-on-scroll">
       <div class="depoimento-video">
-        <video controls playsinline>
-          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70a93651fdca9585ed8/main.m3u8" type="application/x-mpegURL">
+        <video controls playsinline preload="none" data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70a93651fdca9585ed8/main.m3u8">
         </video>
       </div>
       <div class="depoimento-video">
-        <video controls playsinline>
-          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb064a/main.m3u8" type="application/x-mpegURL">
+        <video controls playsinline preload="none" data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb064a/main.m3u8">
         </video>
       </div>
       <div class="depoimento-video">
-        <video controls playsinline>
-          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb0647/main.m3u8" type="application/x-mpegURL">
+        <video controls playsinline preload="none" data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee709a0e544789ceb0647/main.m3u8">
         </video>
       </div>
       <div class="depoimento-video">
-        <video controls playsinline>
-          <source src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70aa0e544789ceb0651/main.m3u8" type="application/x-mpegURL">
+        <video controls playsinline preload="none" data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70aa0e544789ceb0651/main.m3u8">
         </video>
       </div>
     </div>
@@ -1077,56 +1101,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- FOOTER -->
 <footer class="animate-on-scroll">
-  <img src="logobruno.png" alt="Dr. Bruno Noronha" class="footer-brand" style="height: 40px; width: auto; object-fit: contain; margin: 0 auto 16px;">
+  <picture><source srcset="logobruno.webp" type="image/webp"><img src="logobruno.png" alt="Dr. Bruno Noronha" class="footer-brand" style="height: 40px; width: auto; object-fit: contain; margin: 0 auto 16px;" width="137" height="40" loading="lazy" decoding="async"></picture>
   <div class="footer-sub">Mentoria VIP em Cirurgia Oral</div>
   <a href="https://instagram.com/dr.bruno.noronha" class="footer-insta" target="_blank">@dr.bruno.noronha</a>
   <div class="footer-legal">Todos os direitos reservados.<br>BRUNO NORONHA OLSEN - CNPJ: 54.070.064/0001-98</div>
 </footer>
 
+<!-- Google Tag Manager (deferred to not block rendering) -->
+<script>
+(function() {
+  var gtmLoaded = false;
+  function loadGTM() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W9CQPWZJ');
+  }
+  ['scroll', 'touchstart', 'mousemove', 'click'].forEach(function(e) {
+    window.addEventListener(e, loadGTM, { once: true, passive: true });
+  });
+  window.addEventListener('load', function() {
+    setTimeout(loadGTM, 3500);
+  });
+})();
+</script>
+
 <script>
   (function initCleanAnimations() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const title = document.getElementById("hero-title");
-    if (title) {
-      let charIndex = 0;
-      const splitTextNode = node => {
-        const fragment = document.createDocumentFragment();
-        node.textContent.split(/(\s+)/).forEach(token => {
-          if (!token) return;
-          if (/^\s+$/.test(token)) {
-            fragment.appendChild(document.createTextNode(token));
-            return;
-          }
-          const word = document.createElement("span");
-          word.className = "word";
-          token.split("").forEach(char => {
-            const span = document.createElement("span");
-            span.className = "char";
-            span.textContent = char;
-            span.style.transitionDelay = `${Math.min(charIndex * 24, 1200)}ms`;
-            charIndex += 1;
-            word.appendChild(span);
-          });
-          fragment.appendChild(word);
-        });
-        node.replaceWith(fragment);
-      };
-
-      const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
-      const textNodes = [];
-      while (walker.nextNode()) textNodes.push(walker.currentNode);
-      textNodes.forEach(splitTextNode);
-
-      window.setTimeout(() => {
-        title.querySelectorAll(".char").forEach(char => char.classList.add("revealed"));
-      }, prefersReducedMotion ? 0 : 120);
-    }
-
     const animatedElements = document.querySelectorAll(".animate-on-scroll");
+
     animatedElements.forEach((element, index) => {
       element.style.transitionDelay = `${Math.min((index % 6) * 70, 350)}ms`;
-      if (element.closest(".hero")) element.classList.add("in-view");
     });
 
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -1144,44 +1153,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var videos = document.querySelectorAll('.depoimento-video video');
-    videos.forEach(function(video) {
-      var source = video.querySelector('source').src;
-      if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(source);
-        hls.attachMedia(video);
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = source;
-      }
-    });
-  });
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!-- HLS.js - loaded ONCE, async, with lazy video initialization -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var videos = document.querySelectorAll('video[data-hls-src]');
-    videos.forEach(function(video) {
-      var src = video.getAttribute('data-hls-src');
-      if (Hls.isSupported()) {
-        var hls = new Hls({startLevel: -1});
-        hls.loadSource(src);
-        hls.attachMedia(video);
+(function() {
+  var hlsLoaded = false;
+  var hlsScript = null;
+  var pendingVideos = [];
+
+  function initVideo(video) {
+    var src = video.getAttribute('data-hls-src');
+    if (!src) return;
+    var autoplay = video.hasAttribute('autoplay');
+
+    if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      var hls = new Hls({ startLevel: -1, maxBufferLength: 10, maxMaxBufferLength: 30 });
+      hls.loadSource(src);
+      hls.attachMedia(video);
+      if (autoplay) {
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
           video.play().catch(function(e){});
         });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = src;
+      }
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+      if (autoplay) {
         video.addEventListener('loadedmetadata', function() {
           video.play().catch(function(e){});
         });
       }
+    }
+  }
+
+  function loadHlsAndInit(videos) {
+    if (hlsLoaded) {
+      videos.forEach(initVideo);
+      return;
+    }
+    if (hlsScript) {
+      pendingVideos = pendingVideos.concat(videos);
+      return;
+    }
+    pendingVideos = pendingVideos.concat(videos);
+    hlsScript = document.createElement('script');
+    hlsScript.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
+    hlsScript.async = true;
+    hlsScript.onload = function() {
+      hlsLoaded = true;
+      pendingVideos.forEach(initVideo);
+      pendingVideos = [];
+    };
+    document.body.appendChild(hlsScript);
+  }
+
+  // Lazy-load videos when they come into viewport
+  if ('IntersectionObserver' in window) {
+    var videoObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          loadHlsAndInit([entry.target]);
+          videoObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+
+    document.querySelectorAll('video[data-hls-src]').forEach(function(video) {
+      videoObserver.observe(video);
     });
-  });
+  } else {
+    // Fallback: load all immediately
+    loadHlsAndInit(Array.from(document.querySelectorAll('video[data-hls-src]')));
+  }
+})();
 </script>
 
 </body>

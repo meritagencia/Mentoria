@@ -1,0 +1,41 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python scripts & local backups
+*.py
+__pycache__/
+*.pyc
+*_backup*.html
+Referencia.html
+
+# Raw uncompressed video dumps
+*.MOV
+*.mov
+*.mp4
+
+# Legacy unused assets & projects
+animacao/
+assets/
+obrigado.html
+*.pdf
+IMG_*.jpeg
+foto com aluna e certificado (1).jpg
+EloiseAtendendo.png
+Gemini_Generated_Image_*.png
+c88b9d82-*.png
+TOPO MOBILE.jpg
+TOPO MOBILE.png
+Topo.jpg
+Topo.png
+Topo2.png
+TOPO MOBILE2.png
+
+# IDE & agent files
+.vscode/
+.idea/
