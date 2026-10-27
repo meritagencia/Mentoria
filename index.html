@@ -734,6 +734,338 @@
     display: none;
   }
 
+  /* ---- MODAL DE APLICAÇÃO PROGRESSIVO ---- */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+  .modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .modal-container {
+    position: relative;
+    z-index: 2;
+    background: #0d0d0d;
+    border: 1px solid rgba(253, 207, 91, 0.28);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 580px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 36px 32px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(253, 207, 91, 0.1);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .modal-overlay.active .modal-container {
+    transform: translateY(0) scale(1);
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover {
+    background: rgba(253, 207, 91, 0.2);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: rotate(90deg);
+  }
+  .modal-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(253, 207, 91, 0.1);
+    border: 1px solid rgba(253, 207, 91, 0.25);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .modal-subtitle {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .modal-progress-wrap {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .modal-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+  .modal-progress-text {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ETAPAS PROGRESSIVAS */
+  .form-step {
+    display: none;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 20px;
+  }
+  .form-step:first-of-type {
+    padding-top: 0;
+    border-top: none;
+    margin-top: 0;
+  }
+  .form-step.revealed {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .form-step.completed .form-label::after {
+    content: ' ✓';
+    color: #4ade80;
+    font-weight: 700;
+  }
+  .form-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .form-input {
+    width: 100%;
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #ffffff;
+    font-family: inherit;
+    transition: all 0.25s;
+    box-sizing: border-box;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(253, 207, 91, 0.2);
+    background: #050505;
+  }
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .form-step-actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .form-btn-next {
+    background: rgba(253, 207, 91, 0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .form-btn-next:hover {
+    background: var(--gold);
+    color: #000;
+    transform: translateX(2px);
+  }
+
+  /* RADIOS CUSTOMIZADOS */
+  .radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .radio-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    user-select: none;
+  }
+  .radio-card:hover {
+    background: rgba(253, 207, 91, 0.05);
+    border-color: rgba(253, 207, 91, 0.35);
+  }
+  .radio-card input[type="radio"] {
+    display: none;
+  }
+  .radio-custom {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .radio-custom::after {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+  .radio-card.selected,
+  .radio-card input[type="radio"]:checked + .radio-custom {
+    border-color: var(--gold);
+  }
+  .radio-card input[type="radio"]:checked + .radio-custom::after {
+    transform: scale(1);
+  }
+  .radio-card input[type="radio"]:checked ~ .radio-text {
+    color: #ffffff;
+    font-weight: 500;
+  }
+  .radio-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  /* CONSENTIMENTO E BOTAO FINAL */
+  .form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .form-consent input[type="checkbox"] {
+    display: none;
+  }
+  .checkbox-custom {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(253, 207, 91, 0.5);
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.2s;
+  }
+  .form-consent input[type="checkbox"]:checked + .checkbox-custom {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .form-consent input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '✓';
+    color: #000;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .consent-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+  .btn-submit-whatsapp {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold) 0%, #D4A738 100%);
+    color: #000000;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 10px 25px rgba(253, 207, 91, 0.25);
+  }
+  .btn-submit-whatsapp:hover {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(253, 207, 91, 0.4);
+  }
+  .btn-submit-whatsapp:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-submit-whatsapp .wpp-icon {
+    width: 20px; height: 20px;
+    fill: #000000;
+    flex-shrink: 0;
+  }
+  .modal-security {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      padding: 28px 20px;
+      border-radius: 20px;
+    }
+    .modal-title { font-size: 19px; }
+    .form-label { font-size: 14px; }
+    .radio-text { font-size: 13px; }
+  }
+
 </style>
 </head>
 <body>
@@ -778,7 +1110,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; line-height: 1.3;"><span style="color: var(--gold); font-size: 18px; flex-shrink: 0;">✔</span> <span>Protocolo baseado em evidência científica</span></div>
       </div>
       <div class="hero-actions">
-        <a href="https://wa.me/556681036769?text=Ol%C3%A1,%20Dr.%20Bruno!%20Tenho%20interesse%20na%20Mentoria%20VIP%20de%20Cirurgia%20Oral%20e%20gostaria%20de%20garantir%20minha%20vaga." class="btn-primary" target="_blank">Quero minha vaga</a>
+        <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Quero minha vaga</a>
         <span class="hero-trust">Vagas extremamente limitadas</span>
       </div>
     </div>
@@ -1098,13 +1430,157 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </h2>
     <p class="cta-final-sub">A próxima cirurgia oral pode ser sua. Com segurança, técnica e a tranquilidade de quem sabe o que está fazendo.</p>
     <div class="cta-final-actions">
-      <a href="https://wa.me/556681036769?text=Olá,%20Dr.%20Bruno!%20Tenho%20interesse%20na%20Mentoria%20VIP%20de%20Cirurgia%20Oral%20e%20gostaria%20de%20garantir%20minha%20vaga." class="btn-wpp" target="_blank">
+      <a href="#modal-lead" class="btn-wpp open-lead-modal-btn">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.848L.057 23.998l6.304-1.654A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-5.003-1.371l-.36-.214-3.733.979 1-3.643-.234-.373A9.755 9.755 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
         Falar com o Dr. Bruno
       </a>
     </div>
   </div>
 </section>
+
+<!-- MODAL FORMULARIO PROGRESSIVO -->
+<div id="modal-lead" class="modal-overlay" aria-hidden="true">
+  <div class="modal-backdrop" onclick="closeLeadModal()"></div>
+  <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    
+    <button type="button" class="modal-close" onclick="closeLeadModal()" aria-label="Fechar">✕</button>
+
+    <div class="modal-header">
+      <div class="modal-badge">Mentoria VIP</div>
+      <h3 id="modal-title" class="modal-title">Aplicação para a Mentoria VIP</h3>
+      <p class="modal-subtitle">Preencha as informações para verificar a disponibilidade de vaga individual com o Dr. Bruno Noronha.</p>
+      
+      <div class="modal-progress-wrap">
+        <div class="modal-progress-bar" id="modal-progress-bar" style="width: 16%;"></div>
+      </div>
+      <div class="modal-progress-text" id="modal-progress-text">
+        <span>Progresso da aplicação</span>
+        <span>16%</span>
+      </div>
+    </div>
+
+    <form id="lead-form" onsubmit="handleLeadSubmit(event)" novalidate>
+      
+      <!-- PERGUNTA 1: Nome -->
+      <div class="form-step revealed" id="step-1">
+        <label class="form-label" for="lead-nome">1. Qual é o seu nome completo?</label>
+        <input type="text" id="lead-nome" name="nome" class="form-input" placeholder="Digite seu nome" required autocomplete="name">
+        <div class="form-step-actions">
+          <button type="button" class="form-btn-next" onclick="nextStep(1)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PERGUNTA 2: WhatsApp -->
+      <div class="form-step" id="step-2">
+        <label class="form-label" for="lead-whatsapp">2. Qual é o seu WhatsApp com DDD?</label>
+        <input type="tel" id="lead-whatsapp" name="whatsapp" class="form-input" placeholder="(00) 00000-0000" required autocomplete="tel" maxlength="15">
+        <div class="form-step-actions">
+          <button type="button" class="form-btn-next" onclick="nextStep(2)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PERGUNTA 3: Momento Carreira -->
+      <div class="form-step" id="step-3">
+        <label class="form-label">3. Em qual momento da sua carreira você está?</label>
+        <div class="radio-options">
+          <label class="radio-card">
+            <input type="radio" name="momento_carreira" value="Sou dentista e já atuo clinicamente" onchange="autoAdvance(3)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Sou dentista e já atuo clinicamente</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="momento_carreira" value="Sou dentista recém-formado(a)" onchange="autoAdvance(3)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Sou dentista recém-formado(a)</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="momento_carreira" value="Estou nos últimos semestres de Odontologia" onchange="autoAdvance(3)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Estou nos últimos semestres de Odontologia</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="momento_carreira" value="Estou em outros semestres da faculdade" onchange="autoAdvance(3)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Estou em outros semestres da faculdade</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- PERGUNTA 4: Principal Objetivo -->
+      <div class="form-step" id="step-4">
+        <label class="form-label">4. Qual é o seu principal objetivo hoje?</label>
+        <div class="radio-options">
+          <label class="radio-card">
+            <input type="radio" name="principal_objetivo" value="Ter mais segurança nas cirurgias orais" onchange="autoAdvance(4)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Ter mais segurança nas cirurgias orais</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="principal_objetivo" value="Ganhar experiência clínica supervisionada" onchange="autoAdvance(4)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Ganhar experiência clínica supervisionada</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="principal_objetivo" value="Aprimorar minhas técnicas e previsibilidade" onchange="autoAdvance(4)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Aprimorar minhas técnicas e previsibilidade</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="principal_objetivo" value="Me preparar para entrar no mercado" onchange="autoAdvance(4)">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Me preparar para entrar no mercado</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- PERGUNTA 5: Cidade e Estado -->
+      <div class="form-step" id="step-5">
+        <label class="form-label" for="lead-cidade">5. Em qual cidade e estado você mora?</label>
+        <input type="text" id="lead-cidade" name="cidade_estado" class="form-input" placeholder="Ex.: Rondonópolis - MT" required>
+        <div class="form-step-actions">
+          <button type="button" class="form-btn-next" onclick="nextStep(5)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PERGUNTA 6: Previsão de Investimento -->
+      <div class="form-step" id="step-6">
+        <label class="form-label">6. Quando você pretende investir no seu desenvolvimento profissional?</label>
+        <div class="radio-options">
+          <label class="radio-card">
+            <input type="radio" name="previsao_investimento" value="O quanto antes">
+            <span class="radio-custom"></span>
+            <span class="radio-text">O quanto antes</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="previsao_investimento" value="Nos próximos 3 meses">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Nos próximos 3 meses</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="previsao_investimento" value="Ainda estou conhecendo a mentoria">
+            <span class="radio-custom"></span>
+            <span class="radio-text">Ainda estou conhecendo a mentoria</span>
+          </label>
+        </div>
+
+        <label class="form-consent">
+          <input type="checkbox" id="lead-consent" name="consentimento" checked required>
+          <span class="checkbox-custom"></span>
+          <span class="consent-text">Autorizo o contato da equipe do Dr. Bruno Noronha pelo WhatsApp sobre esta mentoria, conforme a Política de Privacidade.</span>
+        </label>
+
+        <div style="margin-top: 24px;">
+          <button type="submit" id="btn-submit-lead" class="btn-submit-whatsapp">
+            <svg viewBox="0 0 24 24" class="wpp-icon" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.848L.057 23.998l6.304-1.654A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-5.003-1.371l-.36-.214-3.733.979 1-3.643-.234-.373A9.755 9.755 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+            <span id="btn-submit-text">Preparar meu contato pelo WhatsApp</span>
+          </button>
+        </div>
+        <p class="modal-security">🔒 Seus dados estão seguros e serão utilizados exclusivamente para contato da mentoria.</p>
+      </div>
+
+    </form>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="animate-on-scroll">
@@ -1231,6 +1707,245 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Fallback: load all immediately
     loadHlsAndInit(Array.from(document.querySelectorAll('video[data-hls-src]')));
   }
+})();
+</script>
+
+<!-- CONTROLE DO FORMULÁRIO PROGRESSIVO E WEBHOOK -->
+<script>
+(function() {
+  const modal = document.getElementById('modal-lead');
+  const progressBar = document.getElementById('modal-progress-bar');
+  const progressText = document.getElementById('modal-progress-text');
+  const phoneInput = document.getElementById('lead-whatsapp');
+  const totalSteps = 6;
+  let currentStep = 1;
+
+  // Abrir Modal
+  window.openLeadModal = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Foca no primeiro campo se estiver no passo 1
+    if (currentStep === 1) {
+      setTimeout(function() {
+        const inputNome = document.getElementById('lead-nome');
+        if (inputNome) inputNome.focus();
+      }, 300);
+    }
+  };
+
+  // Fechar Modal
+  window.closeLeadModal = function() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  // Fechar no ESC
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeLeadModal();
+    }
+  });
+
+  // Vincular a todos os botões CTA da página
+  document.querySelectorAll('.btn-primary, .btn-wpp, .open-lead-modal-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openLeadModal(e);
+    });
+  });
+
+  // Atualizar Barra de Progresso
+  function updateProgress(step) {
+    const percent = Math.min(Math.round((step / totalSteps) * 100), 100);
+    progressBar.style.width = percent + '%';
+    progressText.innerHTML = '<span>Progresso da aplicação</span><span>' + percent + '%</span>';
+  }
+
+  // Revelar Próximo Passo
+  window.revealStep = function(next) {
+    const nextEl = document.getElementById('step-' + next);
+    if (!nextEl) return;
+    
+    const prevEl = document.getElementById('step-' + (next - 1));
+    if (prevEl) {
+      prevEl.classList.add('completed');
+    }
+
+    nextEl.classList.add('revealed');
+    if (next > currentStep) {
+      currentStep = next;
+      updateProgress(next);
+    }
+
+    setTimeout(function() {
+      nextEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const input = nextEl.querySelector('input[type="text"], input[type="tel"]');
+      if (input) input.focus();
+    }, 150);
+  };
+
+  // Botão Continuar Manual
+  window.nextStep = function(fromStep) {
+    if (fromStep === 1) {
+      const nome = document.getElementById('lead-nome').value.trim();
+      if (!nome || nome.length < 3) {
+        alert('Por favor, digite seu nome completo para continuar.');
+        document.getElementById('lead-nome').focus();
+        return;
+      }
+      revealStep(2);
+    } else if (fromStep === 2) {
+      const whats = document.getElementById('lead-whatsapp').value.replace(/\D/g, '');
+      if (whats.length < 10) {
+        alert('Por favor, informe um WhatsApp válido com DDD (mínimo 10 dígitos).');
+        document.getElementById('lead-whatsapp').focus();
+        return;
+      }
+      revealStep(3);
+    } else if (fromStep === 5) {
+      const cidade = document.getElementById('lead-cidade').value.trim();
+      if (!cidade || cidade.length < 2) {
+        alert('Por favor, informe sua cidade e estado.');
+        document.getElementById('lead-cidade').focus();
+        return;
+      }
+      revealStep(6);
+    }
+  };
+
+  // Avanço Automático ao Selecionar Radio
+  window.autoAdvance = function(current) {
+    setTimeout(function() {
+      revealStep(current + 1);
+    }, 280);
+  };
+
+  // Tecla Enter avança nos inputs de texto
+  const addEnterHandler = function(id, step) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          nextStep(step);
+        }
+      });
+    }
+  };
+  addEnterHandler('lead-nome', 1);
+  addEnterHandler('lead-whatsapp', 2);
+  addEnterHandler('lead-cidade', 5);
+
+  // Máscara Dinâmica de Telefone (00) 00000-0000
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.substring(0, 11);
+      if (v.length > 6) {
+        e.target.value = '(' + v.substring(0, 2) + ') ' + v.substring(2, 7) + '-' + v.substring(7);
+      } else if (v.length > 2) {
+        e.target.value = '(' + v.substring(0, 2) + ') ' + v.substring(2);
+      } else if (v.length > 0) {
+        e.target.value = '(' + v;
+      }
+    });
+  }
+
+  // Estilo ativo nos cartões de Radio
+  document.querySelectorAll('.radio-card input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      const groupName = this.getAttribute('name');
+      document.querySelectorAll('input[name="' + groupName + '"]').forEach(function(r) {
+        const card = r.closest('.radio-card');
+        if (card) card.classList.remove('selected');
+      });
+      const currentCard = this.closest('.radio-card');
+      if (currentCard) currentCard.classList.add('selected');
+    });
+  });
+
+  // Envio da Aplicação e Disparo do Webhook
+  window.handleLeadSubmit = function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit-lead');
+    const btnText = document.getElementById('btn-submit-text');
+
+    const nome = document.getElementById('lead-nome').value.trim();
+    const whatsapp = document.getElementById('lead-whatsapp').value.trim();
+    const momento = (document.querySelector('input[name="momento_carreira"]:checked') || {}).value || '';
+    const objetivo = (document.querySelector('input[name="principal_objetivo"]:checked') || {}).value || '';
+    const cidade = document.getElementById('lead-cidade').value.trim();
+    const previsao = (document.querySelector('input[name="previsao_investimento"]:checked') || {}).value || '';
+    const consent = document.getElementById('lead-consent').checked;
+
+    if (!nome) { revealStep(1); return; }
+    if (!whatsapp) { revealStep(2); return; }
+    if (!momento) { revealStep(3); return; }
+    if (!objetivo) { revealStep(4); return; }
+    if (!cidade) { revealStep(5); return; }
+    if (!previsao) {
+      alert('Por favor, selecione quando você pretende investir.');
+      revealStep(6);
+      return;
+    }
+    if (!consent) {
+      alert('Por favor, autorize o contato da equipe pelo WhatsApp para continuar.');
+      return;
+    }
+
+    btn.disabled = true;
+    btnText.textContent = 'Enviando aplicação...';
+
+    const payload = {
+      nome: nome,
+      whatsapp: whatsapp,
+      momento_carreira: momento,
+      principal_objetivo: objetivo,
+      cidade_estado: cidade,
+      quando_pretende_investir: previsao,
+      consentimento: consent,
+      url_origem: window.location.href,
+      data_hora: new Date().toISOString()
+    };
+
+    // Webhook Make.com
+    const webhookUrl = 'https://hook.us2.make.com/f8iapc382rnst26vn2dv7fvehyc4kqww';
+
+    try {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors',
+        keepalive: true
+      }).catch(function(err) {
+        console.warn('Webhook notice:', err);
+      });
+    } catch (err) {
+      console.warn('Webhook dispatch error:', err);
+    }
+
+    // Mensagem WhatsApp formatada
+    const msg = "Olá, Dr. Bruno! Acabei de preencher minha aplicação para a Mentoria VIP:\n\n" +
+      "👤 *Nome:* " + nome + "\n" +
+      "📱 *WhatsApp:* " + whatsapp + "\n" +
+      "📍 *Cidade/UF:* " + cidade + "\n" +
+      "🎓 *Momento na carreira:* " + momento + "\n" +
+      "🎯 *Principal objetivo:* " + objetivo + "\n" +
+      "⏳ *Previsão de investimento:* " + previsao + "\n\n" +
+      "Gostaria de verificar a disponibilidade de vaga!";
+
+    const wppUrl = "https://wa.me/556681036769?text=" + encodeURIComponent(msg);
+
+    setTimeout(function() {
+      btnText.textContent = 'Redirecionando para o WhatsApp...';
+      window.location.href = wppUrl;
+    }, 500);
+  };
 })();
 </script>
 
