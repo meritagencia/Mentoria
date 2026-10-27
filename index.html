@@ -1133,6 +1133,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="margin-top: 32px; padding: 24px; border: 1px solid rgba(253, 207, 91, 0.20); border-left: 3px solid var(--gold); background: linear-gradient(135deg, rgba(253, 207, 91, 0.10), rgba(255, 255, 255, 0.025)); border-radius: 18px; line-height: 1.68; color: var(--white);">
             <strong>A boa notícia:</strong> isso não é falta de capacidade. É falta de método, treinamento e supervisão. Na Mentoria VIP você aprende diretamente em pacientes reais, com acompanhamento individual.
         </div>
+        <div style="margin-top: 28px;">
+          <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Quero transformar minha prática cirúrgica</a>
+        </div>
       </div>
       <div class="dor-cards">
         <div style="margin-bottom: 8px; color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Você se identifica?</div>
@@ -1243,6 +1246,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="pilar-title" style="font-size: 16px;">Protocolos clínicos</div>
       </div>
     </div>
+    <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+      <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Quero dominar essas cirurgias na prática</a>
+    </div>
     
     <style>
       @media(max-width: 768px) {
@@ -1303,6 +1309,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="mentor-bio">Desde 2017, o Dr. Bruno Noronha dedica sua carreira ao aprimoramento da cirurgia oral. Não porque é fácil — <strong>porque é transformador.</strong></p>
         <p class="mentor-bio">Sua missão na mentoria é simples: colocar na sua mão o mesmo método que ele usa na clínica e nos hospitais. Sem filtro, sem atalho, sem teoria vazia.</p>
         <p class="mentor-bio">Ele sabe que <strong>a diferença entre o dentista inseguro e o cirurgião confiante não é talento — é treinamento.</strong> E é exatamente isso que você vai receber.</p>
+        <div style="margin-top: 32px;">
+          <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Quero ser mentorado pelo Dr. Bruno</a>
+        </div>
         <!-- Estatísticas removidas conforme solicitado -->
       </div>
     </div>
@@ -1343,6 +1352,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="pilar-title" style="font-size: 16px;">Acompanhamento em cirurgias hospitalares</div>
       </div>
     </div>
+    <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+      <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Garantir mentoria individual com paciente real</a>
+    </div>
   </div>
 </section>
 
@@ -1372,6 +1384,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <video controls playsinline preload="none" data-hls-src="https://video.gumlet.io/69ce7db61763b418bf1cfd14/6a2ee70aa0e544789ceb0651/main.m3u8">
         </video>
       </div>
+    </div>
+    <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+      <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Quero ter esses resultados também</a>
     </div>
 </div>
   </div>
@@ -1417,6 +1432,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
 
       
+    </div>
+    <div style="text-align: center; margin-top: 44px;" class="animate-on-scroll">
+      <p style="color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 20px;">Ainda tem dúvidas ou quer avaliar seu momento?</p>
+      <a href="#modal-lead" class="btn-primary open-lead-modal-btn">Preencher aplicação da mentoria</a>
     </div>
   </div>
 </section>
@@ -1750,12 +1769,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   });
 
-  // Vincular a todos os botões CTA da página
-  document.querySelectorAll('.btn-primary, .btn-wpp, .open-lead-modal-btn').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
+  // Vincular a todos os botões CTA da página (delegação global + binding direto)
+  document.addEventListener('click', function(e) {
+    var trigger = e.target.closest('.btn-primary, .btn-wpp, .open-lead-modal-btn, a[href="#modal-lead"]');
+    if (trigger && !trigger.closest('#modal-lead')) {
       e.preventDefault();
       openLeadModal(e);
-    });
+    }
   });
 
   // Atualizar Barra de Progresso
