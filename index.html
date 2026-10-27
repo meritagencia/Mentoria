@@ -1913,34 +1913,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     };
 
     // Webhook Make.com
-    const webhookUrl = 'https://hook.us2.make.com/f8iapc382rnst26vn2dv7fvehyc4kqww';
+    const webhookUrl = 'https://hook.us2.make.com/9etbwe7bielsuffw4u7m0gccxm0fiqwv';
     const redirectUrl = 'obrigado.html?nome=' + encodeURIComponent(nome);
     const jsonBody = JSON.stringify(payload);
 
-    // Método 1: sendBeacon (sobrevive a redirecionamento de página)
-    var beaconSent = false;
+    // Disparo prioritário com fetch (suportado por Make.com com CORS *)
     try {
-      if (navigator.sendBeacon) {
-        var blob = new Blob([jsonBody], { type: 'application/json' });
-        beaconSent = navigator.sendBeacon(webhookUrl, blob);
-        console.log('Beacon enviado:', beaconSent);
-      }
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: jsonBody,
+        keepalive: true
+      });
+      console.log('Webhook Make.com disparado com sucesso');
     } catch (err) {
-      console.warn('sendBeacon falhou:', err);
-    }
-
-    // Método 2: fetch como fallback (aguarda resposta antes de redirecionar)
-    if (!beaconSent) {
+      console.warn('Tentativa com fetch falhou, acionando fallback sendBeacon:', err);
       try {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: jsonBody,
-          keepalive: true
-        });
-        console.log('Fetch webhook enviado com sucesso');
-      } catch (err) {
-        console.warn('Fetch webhook erro (dados podem ter sido enviados):', err);
+        if (navigator.sendBeacon) {
+          const blob = new Blob([jsonBody], { type: 'text/plain;charset=UTF-8' });
+          navigator.sendBeacon(webhookUrl, blob);
+        }
+      } catch (beaconErr) {
+        console.warn('sendBeacon fallback erro:', beaconErr);
       }
     }
 
